@@ -179,34 +179,6 @@ effort and minimal mask intervention, relying only on sparse MVV observations.
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Quantitative Results:</h2>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <img src="static/images/dnerf_results.png" alt="~Missing Image~"/>
-      </div>
-      <div class="item">
-        <img src="static/images/dynerf_results.png" alt="~Missing Image~"/>
-      </div>
-     </div>
-  </div>
-</div>
-</div>
-</section>
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
         <span class="link-block">
           <a href="https://vivo-bvicr.github.io/index.html" target="_blank"
           class="external-link button is-normal is-rounded is-dark">
@@ -329,53 +301,103 @@ effort and minimal mask intervention, relying only on sparse MVV observations.
   <div class="hero-body">
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Flame Salmon Test Videos 
+          </h2>
           <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/dynerf/gs.mp4"
+            <source src="static/videos/salmon.mp4"
             type="video/mp4">
           </video>
           <h2 class="subtitle has-text-centered">
-            SUBTEXT
+            GT | 4D-GS | W4D-GS | Ours 
+            <br> GT | STG | ITGS | Ours (Foreground Only)
+            <br> ...
           </h2>
         </div>
         <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/dynerf/nerf.mp4"
+          <h2 class="subtitle has-text-centered">
+            Flame Steak Test Videos 
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/steak.mp4"
             type="video/mp4">
           </video>
           <h2 class="subtitle has-text-centered">
-            SUBTEXT
+            GT | 4D-GS | W4D-GS | Ours 
+            <br> GT | STG | ITGS | Ours (Foreground Only)
+            <br> ...
           </h2>
         </div>
-
         <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/dynerf/kpc_comparison.mp4"
+          <h2 class="subtitle has-text-centered">
+            Cook Spinach Test Videos 
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/spinach.mp4"
             type="video/mp4">
           </video>
           <h2 class="subtitle has-text-centered">
-            SUBTEXT
+            GT | 4D-GS | W4D-GS | Ours 
+            <br> GT | STG | ITGS | Ours (Foreground Only)
+            <br> ...
           </h2>
         </div>
-
-        <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/dynerf/4dgs_comparison.mp4"
-            type="video/mp4">
-          </video>
-          <h2 class="subtitle has-text-centered">
-            SUBTEXT
-          </h2>
-        </div>
-        
+  
       </div>
     </div>
   </div>
 </section>
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Novel-view Renders</h2>
+        <p class="subtitle has-text-centered" style="font-style: italic;font-weight: 100; color: brown;">
+            Note that for the Vivo scenes we do not have novel views for other models because the novel-view trajectory is dense with floaters 
+            - check test views. Read the paper to undestand why...
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Video carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+           <h2 class="subtitle has-text-centered">
+            Slow-Motion Flame Salmon
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/salmon_nvs.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            4D-GS | Ours | Ours (Foreground Only)
+          </h2>
+        </div>
+
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Slow-Motion Flame Steak
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/steak_nvs.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            4D-GS | W4D-GS | Ours | Ours (Foreground Only)
+          </h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 <section class="section hero is-light">
