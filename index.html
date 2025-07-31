@@ -216,6 +216,7 @@ effort and minimal mask intervention, relying only on sparse MVV observations.
           <span>Vivo 3-D Entertainment Scenes</span>
         </a>
       </span>
+      <br> *videos downsampled to 720p for web-viewing
 
       </div>
     </div>
@@ -227,23 +228,34 @@ effort and minimal mask intervention, relying only on sparse MVV observations.
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
+           <h2 class="subtitle has-text-centered">
+            Bassist Test Videos 
+          </h2>
           <video poster="" id="video1" autoplay controls muted loop height="100%">
             <!-- Your video file here -->
-            <source src="static/videos/dnerf/gs.mp4"
+            
+            <source src="static/videos/bassist.mp4"
             type="video/mp4">
           </video>
           <h2 class="subtitle has-text-centered">
-            SUBTEXT
+            Ground Truth | 4D-GS | STG | SC-GS | Ours
+            <br> Small foreground assets are challenging for SotA to reconstruct as the background consumes a lot
+            of the image/render and volumetric scene spaces. By disentangling foreground and background we overcome
+            this issue.
           </h2>
         </div>
         <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <!-- Your video file here -->
-            <source src="static/videos/dnerf/nerf.mp4"
+          <h2 class="subtitle has-text-centered">
+            Pony Test Videos 
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/pony.mp4"
             type="video/mp4">
           </video>
           <h2 class="subtitle has-text-centered">
-            SUBTEXT
+            Ground Truth | 4D-GS | STG | SC-GS | Ours
+            <br> Large foreground assets are easier for SotA to reconstruct (compared with Bassist) but still miss many
+            fine details.
           </h2>
         </div>
         
