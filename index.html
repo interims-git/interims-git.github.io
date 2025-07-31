@@ -258,7 +258,48 @@ effort and minimal mask intervention, relying only on sparse MVV observations.
             fine details.
           </h2>
         </div>
-        
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Piano Test Videos 
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/piano.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            4D-GS | STG | Ours | Ours (Foreground Only)
+            <br> We disentangle the scene using foreground-background separation.
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Fruit Test Videos 
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/fruit.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            4D-GS | Ours | Ours (Foreground Only)
+            <br> We supress various over and under reconstruction errors. Check out the background at time 30-40s!
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Curling Test Videos 
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/curling.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            4D-GS | STG | Ours | Ours (Foreground Only)
+            <br> There are still clear issues with SV3D. Notably, dealing with large motions that cause large temporal occlusions. This
+            affects both the renders (check out 4DGS and Ours) as well as the final segmented model. This is an issue with disentangling 
+            view-dependant color using Spherical Harmonics (honest SH is terrible for dynmaic scenes). Behind the scenes, we tested a simple
+            view-dependant MLP instead of SH and its much easier to constrain... 
+          </h2>
+        </div>
       </div>
     </div>
   </div>
@@ -283,6 +324,71 @@ effort and minimal mask intervention, relying only on sparse MVV observations.
     </div>
   </div>
 </section>
+<!-- Video carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <!-- Your video file here -->
+            <source src="static/videos/dynerf/gs.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            SUBTEXT
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <!-- Your video file here -->
+            <source src="static/videos/dynerf/nerf.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            SUBTEXT
+          </h2>
+        </div>
+
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <!-- Your video file here -->
+            <source src="static/videos/dynerf/kpc_comparison.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            SUBTEXT
+          </h2>
+        </div>
+
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <!-- Your video file here -->
+            <source src="static/videos/dynerf/4dgs_comparison.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            SUBTEXT
+          </h2>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Ablations (+ Supplementary)</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Video carousel -->
 <section class="hero is-small">
   <div class="hero-body">
