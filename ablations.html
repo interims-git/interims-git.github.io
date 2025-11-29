@@ -145,59 +145,41 @@
 
 
 <!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-         <span style="font-style: italic;text-align: center;"> 
-              Below are some examples of creative applications using our method for sparse view 3-D 
-              reconstruction, followed by an overview of our work and finally the various results, benchmarks and
-              renders from the paper.
-            </span>
-<br>
-            <br>
-        Extended Abstract:
-          <br>
-        <div class="content has-text-justified">
-          <p>
-Deformable Gaussian Splatting (GS) accomplishes photorealistic dynamic 3-D reconstruction from dense multi-view video (MVV) by learning 
-to deform a canonical GS representation. However, in filmmaking, tight budgets can result in sparse camera configurations, which limits 
-state-of-the-art (SotA) methods when capturing complex dynamic features. To address this issue, we introduce an approach that splits the 
-canonical Gaussians and deformation field into foreground and background components using a sparse set of masks for frames at t=0. Each 
-representation is separately trained on different loss functions during canonical pre-training. Then, during dynamic training, different
- parameters are modeled for each deformation field following common filmmaking practices. The foreground stage contains diverse dynamic 
- features so changes in color, position and rotation are learned. While, the background containing film-crew and equipment, is typically
-  dimmer and less dynamic so only changes in point position are learned.
-Experiments on 3-D and 2.5-D entertainment datasets show that our method produces SotA qualitative and quantitative results; up to 3
- PSNR higher with half the model size on 3-D scenes. Unlike the SotA and without the need for dense mask supervision, our method also 
- produces segmented dynamic reconstructions including transparent and dynamic textures. 
+<section class="section hero is-light" style="align-items: center;">
+  <h2 class="subtitle has-text-centered">
+    Per-Scene ablation results on Dataset 3 
+  </h2>
+<iframe 
+  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR18T3v_e60sObm2__MFIeyIZImXngwtcfPKqrQa3ifzAyS6235WGWoc4upBy_I-bP4oTkQVVNZfJn-/pubhtml?widget=true&amp;headers=false"  width="80%"
+  height="800px"
+  frameborder="0">
+</iframe>
 
-            
-           
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <section class="hero is-small">
+  
   <div class="hero-body">
     <div class="container">
+      <br>
+
+  <h2 class="subtitle has-text-centered">
+    Side-By-Side Test Videos
+  </h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
            <h2 class="subtitle has-text-centered">
-            Audio-visual VFX for music
+            Video 1
           </h2>
           <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <source src="static/videos/showcase.mp4"
+            <source src="static/videos/asa.mp4"
             type="video/mp4">
           </video>
         </div>
 
         <div class="item item-video2">
           <h2 class="subtitle has-text-centered">
-            Combining various Gaussian Splatting VFX 
+            Video 1
           </h2>
           <video poster="" id="video1" autoplay controls muted loop height="100%">
             <source src="static/videos/piano_vfx.mp4"
@@ -217,79 +199,29 @@ Experiments on 3-D and 2.5-D entertainment datasets show that our method produce
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Proposed work:</h2>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        Analysis
+      </h2>          
       <br>
-      <br>
-      <img src="static/images/main.png" alt="~Missing Image~"/>
-
-      <h2 class="subtitle">
-This paper's primary focus is to tackle SV3D reconstruction challenges by:  <br>    
-<span style="margin-left: 30px;">(1) Proposing a new dynamic scene representation that 
-disentangles the foreground and background to deal with point-importance</span>
-<br>
-<span style="margin-left: 30px;">(2) Developing a new strategy for training canonical representations to deal with poor initialization.</span>
-<br>
-<br>
-Linking this work to filmmaking, we leverage foreground-background separation to 
-apply background-specific constraints based on filmmaking practices; discussed in Introduction. This aims to suppress
- the reconstruction artifacts associated with background and foreground reconstruction, which we indentify in the above figure.
-We also place emphasis on reconstructing RTD textures as they are more common in filmmaking 
-  than most other practices.
-   </h2>
-    </div>
-  </div>
-</section>
-
-
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Title Here</h2>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="hero is-small">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <span  style="color: brown; font-style: italic;">Bla bla bla ...
-        </span> 
-          <br>
         <div class="content has-text-justified">
-          <p>Words Words Words...
-
+          <p>
+This paper introduces a Gaussian Splatting (GS) approach to relighting and reconstructing 3-D scenes containing real in-camera 
+image-based lighting (RIC-IBL) sources. This is applied Virtual Studio (VS) film production, where LED walls project live virtual
+backgrounds that produce RIC-IBL effects. The goal of VS reconstruction and relighting (VSR) is to provide the ability to change 
+the RIC-IBL background texture and propagate the lighting changes to a 3-D scene. As no prior RIC-IBL research exists, this paper 
+establishes a robust platform for future work by introducing a novel pipeline, a handful of baselines for RIC-IBL texture sampling, 
+and several datasets including real VS scenes. The main method is a geometry-independent lighting model that explicitly represents 
+the IBL texture coordinates and lighting intensity as view-dependent GS parameters. This avoids computing physically-based events 
+linked to inverse rendering (IR). Hence, our method does not rely on depth/normal priors, is capable of reconstructing diverse
+scenes including transparent objects, and can be implemented without custom CUDA or RTX code. The final model only uses less than 5GB 
+of RAM and VRAM for training 1080p scenes. In practice, our method removes the need for costly VS-specific hardware and offers 
+numerous possibilities for revolutionizing the VS production process to benefit post production artistry.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!--BibTex citation -->
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{...}</code></pre>
-  </div>
-</section>
-<!--End BibTex citation -->
-
-
 
 <!-- End image carousel -->
 

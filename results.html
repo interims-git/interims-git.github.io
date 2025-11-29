@@ -175,7 +175,7 @@
             Video 1
           </h2>
           <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <source src="static/videos/showcase.mp4"
+            <source src="static/videos/xx.mp4"
             type="video/mp4">
           </video>
         </div>
@@ -198,7 +198,35 @@
   </div>
 </section>
 
-  <footer class="footer">
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <h2 class="subtitle has-text-centered">
+        Analysis
+      </h2>          
+      <br>
+        <div class="content has-text-justified">
+          <p>
+This paper introduces a Gaussian Splatting (GS) approach to relighting and reconstructing 3-D scenes containing real in-camera 
+image-based lighting (RIC-IBL) sources. This is applied Virtual Studio (VS) film production, where LED walls project live virtual
+backgrounds that produce RIC-IBL effects. The goal of VS reconstruction and relighting (VSR) is to provide the ability to change 
+the RIC-IBL background texture and propagate the lighting changes to a 3-D scene. As no prior RIC-IBL research exists, this paper 
+establishes a robust platform for future work by introducing a novel pipeline, a handful of baselines for RIC-IBL texture sampling, 
+and several datasets including real VS scenes. The main method is a geometry-independent lighting model that explicitly represents 
+the IBL texture coordinates and lighting intensity as view-dependent GS parameters. This avoids computing physically-based events 
+linked to inverse rendering (IR). Hence, our method does not rely on depth/normal priors, is capable of reconstructing diverse
+scenes including transparent objects, and can be implemented without custom CUDA or RTX code. The final model only uses less than 5GB 
+of RAM and VRAM for training 1080p scenes. In practice, our method removes the need for costly VS-specific hardware and offers 
+numerous possibilities for revolutionizing the VS production process to benefit post production artistry.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -216,11 +244,5 @@
   </div>
 </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>
