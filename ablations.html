@@ -164,7 +164,7 @@
       <br>
 
       <h2 class="subtitle has-text-centered">
-        Side-By-Side Test Videos for the Baseline Experiments
+        Side-By-Side NVLS Test Videos for Ablations (i) & (ii)
       </h2>
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
@@ -194,6 +194,49 @@
           </iframe>
           <h2 class="subtitle has-text-centered">
             6, 12 and 18 views + Ground Truth (GT)
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Varying the number of K training illuminations on Dataset 3 Scene 1-3 (NVLS)
+          </h2>
+            <video poster="" id="video1" autoplay controls muted loop height="100%">
+              <source src="static/videos/ablations_ii.mp4"
+              type="video/mp4">
+            </video>
+          <h2 class="subtitle has-text-centered">
+            1, 10, 20 and 30 IBL training scenes + Ground Truth (GT)
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  
+  <div class="hero-body">
+    <div class="container">
+      <br>
+
+      <h2 class="subtitle has-text-centered">
+        Statistical Results and NVLS Ablations Results for (iii)
+      </h2>
+
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+            Statistical plot of the frequency and regularity metrics used for optimizing reconstruction on K=1 scenes for Datset 3
+          </h2>
+          <img src="static/images/ablations_iii.png" alt="~Missing Image~"/>
+
+          <h2 class="subtitle has-text-centered">
+            The y-axis uses the homogeneity metric associated with the GLCM algorithm for image texture classification. The x-axis averages 
+            the square of RGB Garbor-wavelet cooefficients (i.e. the banded frequency magnitudes) producing the frequency-based energy density metric. 
+            We select (a) the lowest frequency, (b) the highest frequency and regularity and (c) the highest frequency and lowest regularity. The statistics are drawn by
+            computing the x-y axis metrics per-camera for each of the 99 scenes in Dataset 3 and averaging. To avoid skewing selection, we use the camera-masks 
+            (discussed in the paper) to avoid evaluating the RIC-IBL background projections during statistical testing. Hence, these statistics are observations of the 
+            ground truth 3-D scene not including the IBL texture.
           </h2>
         </div>
         <div class="item item-video2">
