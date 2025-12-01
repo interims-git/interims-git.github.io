@@ -120,8 +120,41 @@
   </div>
 </section>
 
+<div>
+  <a style="position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 155px;
+  height: 30px;
+  font-size: 25px;
+  text-align: center;" href="#contents">^Contents</a>
+</div>
 
-<section class="section hero is-light">
+<section class="section hero" id="contents">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered ">
+      <div class="column is-four-fifths" >
+        <h2 class="title is-3" >Contents</h2>
+<ul>
+  <li><a href="#introduction">1. Full Metrics & Video Results for Baselines </a></li>
+  <li><a href="#ablation">2. Full Ablation Results and Analysis</a></li>
+  <li><a style="margin-left: 30px;" href="#expi">1. Experiments (i-ii) Varying J and K</a></li>
+  <li><a style="margin-left: 30px;" href="#expiii">2. Experiments (iii) Optimizing VSR via texture selection</a></li>
+  <li><a style="margin-left: 30px;" href="#expiv">3. Experiments (iv) Ablating the canonical training scheme</a></li>
+  
+  
+  <li><a href="#datacollection">3. More on Datacollection & Future Work</a></li>
+  <li><a href="#relatedwork">4. More on Related Works</a></li>
+
+</ul>
+<br>
+<br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" id="introduction">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -143,7 +176,6 @@
         <div class="content has-text-justified">
           <p>
 The test data can be split into three categories: 
-<br>
 <br>
 <span style="margin-left: 30px;">
 (1) Novel view and light synthesis (NVLS) where novel views and novel light conditions are tested
@@ -170,6 +202,7 @@ Switch between "NVLS", "NVS" and "NLS" tabs in the sheet below to view the per-d
   frameborder="0">
 </iframe>
 </section>
+
 <section class="hero is-small">
   <h2 class="subtitle has-text-centered">
     <u>B. Side-By-Side Test Videos for the Baseline Experiments</u>
@@ -242,7 +275,7 @@ Below we provide videos for a handful of the NVLS, NVS and NLS video results. No
         </div>
         <div class="item item-video4">
            <h2 class="subtitle has-text-centered">
-            Novel Lighting Synthesis on Dataset 4 Scene 1-3
+            Novel Lighting Synthesis on Dataset 3 Scene 1-3
           </h2>
           <iframe 
             width="100%" 
@@ -280,6 +313,7 @@ Below we provide videos for a handful of the NVLS, NVS and NLS video results. No
     </div>
   </div>
 </section>
+
 <section class="section hero" style="align-items: center;">
   <h2 class="subtitle has-text-centered">
    <u>C. Extended Analysis of Full Baseline Results</u>
@@ -298,7 +332,7 @@ The test data can be split into three categories:
   </div>
 </section>
 
-<section class="section hero is-light">
+<section class="section hero is-light" id="ablation">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -312,7 +346,7 @@ The test data can be split into three categories:
 <!-- Paper abstract -->
 <section class="section hero" style="align-items: center;">
   <h2 class="subtitle has-text-centered">
-    <u>A. Full per-Scene metric results for the ablations on Dataset 3 </u>
+    <u>A. Full per-scene metric results for the ablations on Dataset 3 </u>
   </h2>
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -336,7 +370,7 @@ presents the additional ablation results, evaluating the impact of reformulating
 
 </section>
 
-<section class="hero is-small">
+<section class="hero is-small" id="expi">
   <h2 class="subtitle has-text-centered">
     <u>B. Side-By-Side Test Videos and Extended Analysis for Experiments (i-ii)</u>
   </h2>
@@ -376,10 +410,10 @@ presents the additional ablation results, evaluating the impact of reformulating
           <h2 class="subtitle has-text-centered">
             Varying the number of K training illuminations on Dataset 3 Scene 1-3 (NVLS)
           </h2>
-            <video poster="" id="video1" autoplay controls muted loop height="100%">
-              <source src="static/videos/ablations_ii.mp4"
-              type="video/mp4">
-            </video>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/ablations_ii.mp4"
+            type="video/mp4">
+          </video>
           <h2 class="subtitle has-text-centered">
             1, 10, 20 and 30 IBL training scenes + Ground Truth (GT)
           </h2>
@@ -394,22 +428,53 @@ presents the additional ablation results, evaluating the impact of reformulating
           <p>
 Here is lies...
           </p>
+          <br>
+          <br>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="hero is-small">
+<section class="hero is-small"  id="expiii">
   <h2 class="subtitle has-text-centered">
-    <u>C. Statistical Results and NVLS Ablations Results for (iii)</u>
+    <u>C. Statistical Approach and Results for (iii): Optimizing performance via statistically-drive texture selection</u>
   </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+In the carousel below, we present the outcomes and insights of experiment (iii). This concerns the capture scenrio where
+only 1x IBL scene/background is captured, as was done in experiment (ii.a). However, we question whether a texture could
+be selected to optimize for VSR quality. To accomplish this we evaluate two important traits associated with spatially-varying
+RIC-IBL textures:
+<br>
+<span style="margin-left: 30px;">(1) The frequency density of the image, i.e. how varied is the frequency distribution of the texture?
+</span>
+<br>
+<span style="margin-left: 30px;">(2) The texture regularity/uniformity, i.e. how unique are local image patches?
+</span>
+<br>
+For (1) we use the energy function for the Garbor-Wavelet coefficients to indicate the variance and magnitude of texture-frequencies,
+in a single metric. The Garbor-Wavelet is typically used for natural images, over e.g. Fourier or other Wavelet schemes.
+<br>
+For (2) we use the homoeneity heuristic from the Grey-Level Co-occurent Matric (GLCM). This is another common scheme for
+assessing the regularity/uniformity of a texture. A set of heuristics are avaliable under the GLCM algorith, though we
+find the results are relatively similar, so we select the homogeneity metric for this paper. The GLCM algorithm is reliant
+on computing metrics based on filter direction and scale. This is essentially the direction along the image should we move to compare
+the current pixel-patch to the next, and how far we should move. In this paper we evaluate four directions, 0deg, 45deg, 90deg, 135deg, and 
+four distances 1 pixel, 2 pixels and 4 pixels. The 
+<a href="https://scikit-image.org/docs/0.25.x/auto_examples/features_detection/plot_glcm.html">GLCM Scikit-learn package</a>
+handles this all for us.
+<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
   <div class="hero-body">
     <div class="container">
-      <br>
-
-      
-
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
           <h2 class="subtitle has-text-centered">
@@ -428,33 +493,169 @@ Here is lies...
         </div>
         <div class="item item-video2">
           <h2 class="subtitle has-text-centered">
-            Varying the number of K training illuminations on Dataset 3 Scene 1-3 (NVLS)
+            NVLS video on Dataset 3 
           </h2>
-            <video poster="" id="video1" autoplay controls muted loop height="100%">
-              <source src="static/videos/ablations_ii.mp4"
-              type="video/mp4">
-            </video>
+            <iframe 
+              width="100%" 
+              height="480px" 
+              src="https://www.youtube.com/embed/w0wq6Osrlus" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
           <h2 class="subtitle has-text-centered">
-            1, 10, 20 and 30 IBL training scenes + Ground Truth (GT)
+            (ignore the Gaussian ditractors caused by generating videos at a further distance from the scene center)
           </h2>
         </div>
-        <div class="item item-video2">
+        <div class="item item-video3">
           <h2 class="subtitle has-text-centered">
-            Varying the number of K training illuminations on Dataset 3 Scene 1-3 (NVLS)
+Pause frame showing the effectiveness of selecting the best texture for VSR
           </h2>
-            <video poster="" id="video1" autoplay controls muted loop height="100%">
-              <source src="static/videos/ablations_ii.mp4"
-              type="video/mp4">
-            </video>
+            <img src="static/images/ablations_iii_frame.png" id="video1" alt="~Missing Image~"/>
+
           <h2 class="subtitle has-text-centered">
-            1, 10, 20 and 30 IBL training scenes + Ground Truth (GT)
+Assessing only the relighting capabilities, we can see that by selecting a texture with low regularity and high frequency 
+features the NVLS results are much smoother and color accurate to the IBL texture. Not only does the low frequency texture produce
+poor lighting results, the geometry of the transparent object is also poorly reconstructed. The high frequency and regularity 
+texture produces decent geometry but fails to produce colors corresponding to the IBl texture. The high frequency and low regularity
+texture produces both decent geometry and color estimates.
           </h2>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+The results show that selecting the right texture can have an large impact on both reconstruction and lighting quality.
+This experiment effectively shows that textures can be statistically selected to boost VSR performance. Carrying this
+into the VS use-case, this insinuates that backgrounds can be designed for VSR prupose. In layman terms, directors
+would no longer need to make decisions about VFX and scene lighting before or during filming. If they capture scenes
+for VSR rather than for the final pixel, important creative decisions could be made later in the process with 
+much more flexibility and fine-grained control. Especially considering that VSR inherits the editability and AOVs
+associated with Gaussian Splatting tools and research. 
+              </p>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
 </section>
 
+<section class="hero is-small"  id="expiv">
+  <h2 class="subtitle has-text-centered">
+    <u>D. Ablating the Canonical Scene</u>
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+In the carousel below, we present two important ablations concerning the canonical scene
+<br>
+<span style="margin-left: 30px;">
+(a) The case when no "unlit" references are avaliable so one of the lit scenes acts as the canonical scene 
+</span>
+<br>
+<span style="margin-left: 30px;">
+(b) The case when the canonical scene is left un-constrained by removing the canonical loss from training
+</span>
+<br>
+As done previously, we test this on Dataset 3 and show the video results below.
+<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+NVLS test videos on Datset 3
+          </h2>
+            <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/o_PueN_m5MU" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+          <h2 class="subtitle has-text-centered">
+Cohering with the metric results, the test videos show that training (a) a pre-lit scene to act as the canonical scene produces
+substantially worse results. In almost all cases the scene color does not match the IBL texture color. When training (b) without
+the canonical loss function, we find that the visual results are not far off the original results (Ours). There are still some
+cases when the lighting of (b) is slightly miscolored (visible by observing the floor) and the geometry of the glass
+object is less robust than the result from Ours.      
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+Visual Comparison of reaction to dynamic/video Backgrounds
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/JIrBG7ktOxE" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+
+          <h2 class="subtitle has-text-centered">
+The (first) lighting video shows that (a) has a redish lingering color, likely linked to poor exposure approximation. 
+Here, (b) is a more similar to the original VSR result (Ours), though it is shown to have a higher range of constrast, 
+originating from the fact the canon is unconstrained. The same is true for the second and third video.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+aNALYSIS
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<br>
+<br>
+
+<section class="section hero is-light" id="datacollection">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">3. More on Datacollection and Future Work</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" id="relatedwork">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">3. More on Related Works</h2>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer class="footer">
   <div class="container">
