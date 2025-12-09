@@ -136,15 +136,17 @@
       <div class="column is-four-fifths" >
         <h2 class="title is-3" >Contents</h2>
 <ul>
-  <li><a href="#introduction">1. Full Metrics & Video Results for Baselines </a></li>
-  <li><a href="#ablation">2. Full Ablation Results and Analysis</a></li>
+  <li><a href="#relatedwork">1. More on Related Work</a></li>
+  <li><a href="#introduction">2. Full Metrics & Video Results for Baselines </a></li>
+  <li><a href="#ablation">3. Full Ablation Results and Analysis</a></li>
+  <li><a style="margin-left: 30px;" href="#exp0">1. Full Ablation Metric Results</a></li>
   <li><a style="margin-left: 30px;" href="#expi">1. Experiments (i-ii) Varying J and K</a></li>
-  <li><a style="margin-left: 30px;" href="#expiii">2. Experiments (iii) Optimizing VSR via texture selection</a></li>
-  <li><a style="margin-left: 30px;" href="#expiv">3. Experiments (iv) Ablating the canonical training scheme</a></li>
+  <li><a style="margin-left: 30px;" href="#expiv">3. Experiments (iii) Ablating the canonical training scheme</a></li>
   
-  
-  <li><a href="#datacollection">3. More on Datacollection & Future Work</a></li>
-  <li><a href="#relatedwork">4. More on Related Works</a></li>
+  <li><a href="#capability">4. Extending VSR Capabilities</a></li>
+  <li><a style="margin-left: 30px;" href="#expiii">1. Optimizing VSR via texture selection</a></li>
+
+  <li><a href="#datacollection">Redirect to Data Method and Colelction Page</a></li>
 
 </ul>
 <br>
@@ -154,11 +156,69 @@
   </div>
 </section>
 
+<section class="section hero is-light" id="relatedwork">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">1. More on Related Works</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <img src="static/images/ir_vsr_diagram.png" alt="~Missing Image~"/>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+1. More on Inverse Rendering
+      </h2>
+      <p>
+      <span>
+In the figure above we compare the IR and VSR data requirements, generic Gaussian primitives, rendering pipeline and training scheme. There are clear differences regarding
+representation, data needs and loss functions. Notably, our method acts independent of Gaussian geometry, does not rely on priors and can be trained using the simple panpotic loss
+function. Futhermore, our method does not require custom CUDA/RTX code and uses the well documented <a href="https://github.com/nerfstudio-project/gsplat">gsplat rasterizer</a>.
+      </span>
+        </p>
+        <br>
+        <br>
+              <h2 class="subtitle" style="margin-bottom: 0px;">
+2. Unconstrained Illumination in Photo Collections (UIPC)
+      </h2>
+      <p>
+      <span>
+UIPC research focuses on 3D scene relighting for unconstrained photo collections. This mainly involves reconstructing landmarks from data that is scraped from social media websites, so contains seasonal appearance captured over different periods of the day and year. Here, 3D relighting pipelines are expected to interpolate between the variable lighting as well as deal with various geometric capture conditions. UIPC shares similarity with our VSR paradigm, as VSR also ingests a dataset with variable light conditions. The difference lies with the research objective, as UIPC pipelines mainly focus on dealing with explicit geometric uncertainties related to the unconstrained photo collections. For example, the XX landmark dataset is composed of images scraped from social media so the data contains distractors, like transient humans or vehicles or animals. Instead, our method aims to capture implicit geometric phenomena to support unseen lighting conditions, i.e. when a new background texture is introduces. 
+
+As a result, UIPC research is mainly focused on dealing with temporal distractors that arise from, As the main paradigm of VSR regards the approach to IBL texture sampling, there is not much inspiration that can gained from comparing VSR to UIPC.
+      </span>
+        </p>
+                <br>
+        <br>
+              <h2 class="subtitle" style="margin-bottom: 0px;">
+3. Gaussian Splatting Texture Enhancement (GTE)
+      </h2>
+      <p>
+      <span>
+GTE research mainly focuses on anti-aliasing problems for generic scene reconstruction, not relighting. GTE focuses on novel ray-Gaussian intersection schemes that allow for Gaussian sub-sampling - enhancing the expressivity of the scene. Thus, GTE research remains unrelated to the VSR texture sampling. However, TexGS proposes a Gaussian sub-sampling method that samples a ground truth RGBA texture per-Gaussian. TexGS adopts a color deformation scheme akin to dynamic GS reconstruction, replacing the temporal color residual with a view-dependent color residual. 
+
+Inspired by this work, we extend the deformation model by introducing an intensity parameter that modifies the magnitude of the deformation, independent of IBL texture. This essentially models a static exposure setting, which future work could explore for scene editing applications. 
+      </span>
+        </p>
+    </div>
+  </div>
+</section>
+
+
+
 <section class="section hero is-light" id="introduction">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">1. Per-Dataset and Per-Scene Results for Baseline Experiments</h2>
+        <h2 class="title is-3">2. Per-Dataset and Per-Scene Results for Baseline Experiments</h2>
 
       </div>
     </div>
@@ -168,7 +228,7 @@
 <!-- Paper abstract -->
 <section class="section hero" style="align-items: center;">
   <h2 class="subtitle has-text-centered">
-   <u>A. Full Novel View and Lighting Synthesis (NVLS), Novel View Synthesis (NVS) and Novel Lighting Synthesis (NLS) Results</u>
+   <u>1. Full Novel View and Lighting Synthesis (NVLS), Novel View Synthesis (NVS) and Novel Lighting Synthesis (NLS) Results</u>
   </h2>
 <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -205,7 +265,7 @@ Switch between "NVLS", "NVS" and "NLS" tabs in the sheet below to view the per-d
 
 <section class="hero is-small">
   <h2 class="subtitle has-text-centered">
-    <u>B. Side-By-Side Test Videos for the Baseline Experiments</u>
+    <u>2. Side-By-Side Test Videos for the Baseline Experiments</u>
   </h2>
   <div class="hero-body">
     <div class="container">
@@ -336,7 +396,7 @@ The test data can be split into three categories:
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">2. Ablation Experiments</h2>
+        <h2 class="title is-3">3. Ablation Experiments</h2>
 
       </div>
     </div>
@@ -344,9 +404,9 @@ The test data can be split into three categories:
 </section>
 
 <!-- Paper abstract -->
-<section class="section hero" style="align-items: center;">
+<section class="section hero" id="exp0" style="align-items: center;">
   <h2 class="subtitle has-text-centered">
-    <u>A. Full per-scene metric results for the ablations on Dataset 3 </u>
+    <u>1. Full per-scene metric results for the ablations on Dataset 3 </u>
   </h2>
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -372,7 +432,7 @@ presents the additional ablation results, evaluating the impact of reformulating
 
 <section class="hero is-small" id="expi">
   <h2 class="subtitle has-text-centered">
-    <u>B. Side-By-Side Test Videos and Extended Analysis for Experiments (i-ii)</u>
+    <u>2. Side-By-Side Test Videos and Extended Analysis for Experiments (i-ii)</u>
   </h2>
   <div class="hero-body">
     <div class="container">
@@ -436,9 +496,110 @@ Here is lies...
   </div>
 </section>
 
+<section class="hero is-small"  id="expiv">
+  <h2 class="subtitle has-text-centered">
+    <u>3. Ablating the Canonical Scene</u>
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+In the carousel below, we present two important ablations concerning the canonical scene
+<br>
+<span style="margin-left: 30px;">
+(a) The case when no "unlit" references are avaliable so one of the lit scenes acts as the canonical scene 
+</span>
+<br>
+<span style="margin-left: 30px;">
+(b) The case when the canonical scene is left un-constrained by removing the canonical loss from training
+</span>
+<br>
+As done previously, we test this on Dataset 3 and show the video results below.
+<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+NVLS test videos on Datset 3
+          </h2>
+            <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/o_PueN_m5MU" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+          <h2 class="subtitle has-text-centered">
+Cohering with the metric results, the test videos show that training (a) a pre-lit scene to act as the canonical scene produces
+substantially worse results. In almost all cases the scene color does not match the IBL texture color. When training (b) without
+the canonical loss function, we find that the visual results are not far off the original results (Ours). There are still some
+cases when the lighting of (b) is slightly miscolored (visible by observing the floor) and the geometry of the glass
+object is less robust than the result from Ours.      
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+Visual Comparison of reaction to dynamic/video Backgrounds
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/JIrBG7ktOxE" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+
+          <h2 class="subtitle has-text-centered">
+The (first) lighting video shows that (a) has a redish lingering color, likely linked to poor exposure approximation. 
+Here, (b) is a more similar to the original VSR result (Ours), though it is shown to have a higher range of constrast, 
+originating from the fact the canon is unconstrained. The same is true for the second and third video.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+
+
+<section class="section hero is-light" id="capability">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">4. Extending VSR Capabilities</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
 <section class="hero is-small"  id="expiii">
   <h2 class="subtitle has-text-centered">
-    <u>C. Statistical Approach and Results for (iii): Optimizing performance via statistically-drive texture selection</u>
+    <u>1. Statistical Approach and Results for (iii): Optimizing performance via statistically-drive texture selection</u>
   </h2>
   <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
@@ -547,115 +708,10 @@ associated with Gaussian Splatting tools and research.
       </div>
 </section>
 
-<section class="hero is-small"  id="expiv">
-  <h2 class="subtitle has-text-centered">
-    <u>D. Ablating the Canonical Scene</u>
-  </h2>
-  <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <div class="content has-text-justified">
-              <p>
-In the carousel below, we present two important ablations concerning the canonical scene
-<br>
-<span style="margin-left: 30px;">
-(a) The case when no "unlit" references are avaliable so one of the lit scenes acts as the canonical scene 
-</span>
-<br>
-<span style="margin-left: 30px;">
-(b) The case when the canonical scene is left un-constrained by removing the canonical loss from training
-</span>
-<br>
-As done previously, we test this on Dataset 3 and show the video results below.
-<br>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <h2 class="subtitle has-text-centered">
-NVLS test videos on Datset 3
-          </h2>
-            <iframe 
-            width="100%" 
-            height="480px" 
-            src="https://www.youtube.com/embed/o_PueN_m5MU" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-          </iframe>
-          <h2 class="subtitle has-text-centered">
-Cohering with the metric results, the test videos show that training (a) a pre-lit scene to act as the canonical scene produces
-substantially worse results. In almost all cases the scene color does not match the IBL texture color. When training (b) without
-the canonical loss function, we find that the visual results are not far off the original results (Ours). There are still some
-cases when the lighting of (b) is slightly miscolored (visible by observing the floor) and the geometry of the glass
-object is less robust than the result from Ours.      
-          </h2>
-        </div>
-        <div class="item item-video2">
-          <h2 class="subtitle has-text-centered">
-Visual Comparison of reaction to dynamic/video Backgrounds
-          </h2>
-          <iframe 
-            width="100%" 
-            height="480px" 
-            src="https://www.youtube.com/embed/JIrBG7ktOxE" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-          </iframe>
-
-          <h2 class="subtitle has-text-centered">
-The (first) lighting video shows that (a) has a redish lingering color, likely linked to poor exposure approximation. 
-Here, (b) is a more similar to the original VSR result (Ours), though it is shown to have a higher range of constrast, 
-originating from the fact the canon is unconstrained. The same is true for the second and third video.
-          </h2>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <div class="content has-text-justified">
-              <p>
-...
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-</section>
 
 <br>
 <br>
 
-<section class="section hero is-light" id="datacollection">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">3. More on Datacollection and Future Work</h2>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section hero is-light" id="relatedwork">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">3. More on Related Works</h2>
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer class="footer">
   <div class="container">
