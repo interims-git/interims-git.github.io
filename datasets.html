@@ -141,11 +141,16 @@
 <ul>
   <li><a href="https://drive.google.com/drive/folders/1VBBjTOb6gVEkLevtMpoUDA7GokchDorc?usp=drive_link">0. Google Drive</a>
 </li>
-  <li><a href="#captureplan">1. Capture Planning</a></li>
+  <li><a href="#datasetstructure">1. Dataset Structure & Initialization</a></li>
+      <li><a style="margin-left: 30px;" href="#strcutrOultine">1. Structure outline</a></li>
+      <li><a style="margin-left: 30px;" href="#estimatescene">2. Estimating Camera Parameters and Training the Initial Scene</a></li>
+      <li><a style="margin-left: 30px;" href="#masksynth">3. Mask Synthesis</a></li>
+
+  <li><a href="#captureplan">2. Capture Planning</a></li>
     <li><a style="margin-left: 30px;" href="#selectingposes">1. Establishing Dimensionality and Selecting Poses for Capture </a></li>
     <li><a style="margin-left: 30px;" href="#textureselection">2. Selecting Textures based on Capture Limitations</a></li>
     <li><a style="margin-left: 30px;" href="#dynamicoptions">3. Potential Options for Dynamic Scene Capture</a></li>
-  <li><a href="#duringcapture">2. During Capture: Practical Tips & Tricks</a></li>
+  <li><a href="#duringcapture">3. During Capture: Practical Tips & Tricks</a></li>
     <li><a style="margin-left: 30px;" href="#singelcam">1. Static scenes with single camera</a></li>
     <li><a style="margin-left: 30px;" href="#multicam">2. Static scenes with multiple cameras</a></li>
 
@@ -156,6 +161,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -232,11 +238,111 @@ All 18 training views for Dataset 1
       </div>
   </section>
 
+
+<section class="section hero is-light" id="datasetstructure">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">1. Dataset Structure</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero teaser" id="strcutrOultine">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+1. The structure of each dataset is shown below.
+      </h2>
+              <div class="code-block-container">
+            <pre><code id="bibtex" style="white-space: pre;">
+[Dataset Name]/
+├──transforms.json # Intrinsics, Extrinsics and Camera/IBL meta data
+├──images/ # Images used for intrinsice and extrinsic pose estimation
+| # Note that in Dataset 1 we use 161 additional views of the canonical scene
+| # to predict better poses. The last 19 frames correspond to cam01-cam19.
+│   ├──frame_00001.jpg
+│   ├──frame_00002.jpg
+│   ...
+│   └──frame_XXXXX.jpg
+├──splat/
+│   └──splat.ply # The ply generated using the Splatfacto
+└──meta/
+    ├──backgrounds/ # IBl background textures
+    |    ├── 001.png 
+    |    ├── 002.png
+    |    ...
+    |    └── YYY.png
+    ├──images/ # IBl background textures
+    |    ├──cam01
+    |    |    ├──001.png
+    |    |    ...
+    |    |    └──YYY.png
+    |    ...
+    |    └──cam19
+    |    |    ├──001.png
+    |    |    ...
+    |    |    └──YYY.png
+    └──masks/ # IBl background textures
+         ├──cam01.png
+         ...
+         └──cam19.png
+
+            </code></pre>    
+        </div>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="estimatescene">
+2. Estimating Camera Parameters and Training the Initial Scene
+      </h2>
+      <p>
+        <span style="margin-left: 30px;">
+First prepare a folder containing you multi-view images. Then download and install <a href="https://docs.nerf.studio/" style="color: blue;">nerfstudio</a>.
+Use the follwoing command to generate poses and intrinsic information. This may fail for datasets with few cameras or limited color bandwidths. In these
+cases, we suggest capturing additional views to improve pose estimates.
+        </span>
+      <br>
+      <code>ns-process-data images --data {DATA_PATH} --output-dir {PROCESSED_DATA_DIR}</code> 
+      <br>
+      <span style="margin-left: 30px;">
+Afterwards, a Splatfacto model is trained using the following command.
+        </span>
+        <br>
+      <code>ns-train splatfacto --data data/nerfstudio/poster --load-dir {outputs/.../nerfstudio_models}</code> 
+              <br>
+      <span style="margin-left: 30px;">
+After training, the following commands are used to extract the camera poses and initial splat.
+        </span>
+        <div class="code-block-container">
+            <pre><code id="bibtex" style="white-space: pre;">
+ns-export cameras --load-config {output/.../config.yml} --output-dir exports/
+ns-export gaussian-splat --load-config {output/.../config.yml} --output-dir exports/
+            </code></pre>    
+        </div>
+      </p>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="masksynth">
+3. Mask Synthesis
+      </h2>
+            <p>
+        <span style="margin-left: 30px;">
+In our case, there are only 19 views for which require masks so masks were drawn by hand at took around 1-minute per mask. There are however
+options to use automated segmentation, such as with <a href="https://ai.meta.com/sam2/">SAM2</a> and <a href="https://ai.meta.com/sam3/">SAM3</a>. Though,
+we should note that there exist abmiguities regarding mask synthesis for transparent objects. In these cases we choose to include 
+the entire glass object within our scene mask, as we intend to model the glass objects as part of the 3D GS scene.
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="section hero is-light" id="captureplan">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">1. Capture Planning</h2>
+        <h2 class="title is-3">2. Capture Planning</h2>
 
       </div>
     </div>
@@ -336,7 +442,7 @@ content to rig the human asset.
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">2. During Capture: Practical Tips & Tricks</h2>
+        <h2 class="title is-3">3. During Capture: Practical Tips & Tricks</h2>
 
       </div>
     </div>
