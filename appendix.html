@@ -140,13 +140,20 @@
   <li><a href="#introduction">2. Full Metrics & Video Results for Baselines </a></li>
   <li><a href="#ablation">3. Full Ablation Results and Analysis</a></li>
   <li><a style="margin-left: 30px;" href="#exp0">1. Full Ablation Metric Results</a></li>
-  <li><a style="margin-left: 30px;" href="#expi">1. Experiments (i-ii) Varying J and K</a></li>
+  <li><a style="margin-left: 30px;" href="#expi">2. Experiments (i-ii) Varying J and K</a></li>
   <li><a style="margin-left: 30px;" href="#expiv">3. Experiments (iii) Ablating the canonical training scheme</a></li>
   
   <li><a href="#capability">4. Extending VSR Capabilities</a></li>
   <li><a style="margin-left: 30px;" href="#expiii">1. Optimizing VSR via texture selection</a></li>
 
-  <li><a href="#datacollection">Redirect to Data Method and Collection Page</a></li>
+  <li><a href="#capability">5. More on the Subjective Study</a></listaticfuture">
+    
+  <li><a href="#limitations">5. More on Limitations and Future Work</a></li>
+    <li><a style="margin-left: 30px;" href="#staticfuture">1. Static VSR Problems</a></li>
+    <li><a style="margin-left: 30px;" href="#dynamicfuture">2. Dynamic VSR Problems</a></li>
+
+
+  <li><a href="#datacollection">>>> Redirect to Data Method and Collection Page</a></li>
 
 </ul>
 <br>
@@ -712,6 +719,126 @@ associated with Gaussian Splatting tools and research.
 <br>
 <br>
 
+<section class="section hero is-light" id="capability">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">5. More on Subjective Study</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" id="limitations">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">6. More on Limitations and Future work</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<section class="hero is-small"  id="staticfuture">
+  <br>
+  <h2 class="subtitle has-text-centered">
+    1. Static VSR Problems
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+Not all filmmaking is dynamic. In VS production, the range applications exceeds human-centric capture. Hence, there is value is developing 
+robust static VSR pipelines. 
+<br>
+<br>
+A good use case for this is car advertisement, where cars are placed within a VS volume to simulate driving in various foreign locations. Through 
+VS production, numerous costs linked to trasnportation, insurance and hiring car-specific 
+camera hardware can be avoided. Pre-production planning is also simplified as directors no longer need to consider location-specific challenges. Still,
+VS sets are expensive to hire, various shot types are still challenging to achieve, and baked lighting for highly reflective and transparent surfaces 
+(i.e. cars) are non-trivial to edit in post. Hence, VSR provides a clear solution to reducing VS
+productions costs by only having to capture the scene once and also support downstream video/shot editing. However, we chose this case 
+because it also highlights flaws in our current VSR approach that need to be developed in future work. The results from our model show that one of the 
+largest challenge with VSR is rendering high-resolution reflections in regions where Gaussian distribution is sparse. This mostly concerns the relighting of 
+highly reflective transparent surfaces, so would present major problems when filming cars for advertisement using a VS stage.
+<br>
+<br>
+We believe this issue mainly lies with our choice of adaptive Gaussian densification scheme. We use the vanilla approach that instances points based on the
+gradient changes propagrated from the reconstruction loss. Hence, image-regions with greater reconstruction errors garner greater attention. However, this 
+method of instancing new Gaussians relies on spliting and cloning pre-existing Gaussians. This presents problems in regions with sparse Gaussians, 
+such as those relating to transparent object. Hence, during training our VSR pipeline is unlikely to populate these spatial regions. This highlights the
+need for content-aware densifications schemes.
+<br>
+<br>
+Past this we believe that the initialization of per-Gaussian texture sample coordinates could be improved. When viewing the novel view synthesis results
+with a moving camera we notice view-dependent flickering artifacts. This occurs when the view-dependent change in texture sample coordinates is sensitive 
+and the IBL sample scale is low, i.e. when the Gaussian samples a high-resolution mipmap. For IBL textures high local frequency patterns, this can be 
+detrimental to viewing smoothness. In part this is a dataset limitation - as we only use 18 cameras for training, sparse-view reconstruction
+problems arise leading to view-dependent overfitting. Thus, future work may want to explore methods of smoothing view-dependent features to suppress
+flickering artifacts. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<br>
+<br>
+<section class="hero is-small"  id="dynamicfuture">
+  <h2 class="subtitle has-text-centered">
+2. Dynamic VSR Problems
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+Developing a dynamic VSR pipeline reguires first understanding the four types of illumination events. First, illumination can change due to changes in 
+RIC-IBL texture. Second, illumination can change depending on the viewing angle. Third, illumination can change depending on the global position of 
+the object within the scene. Fourth, illumination can change depending the objects local orientation. In the paper, we deal with disentangling the 
+first two types of lighting event. The third and fourth events arise when dealing with dynamic or editable static scenes.
+<br>
+<br>
+Dynamic VSR pipelines that deal with all four events could concievable take a number of approaches:
+<br>
+<span style="margin-left: 30px;">(1) Modelling 3D neural exposure and texture sampling fields with occlusion awarness
+</span>
+<br>
+<span style="margin-left: 30px;">(2) Implicitly modelling per-Gaussian temporal lighting and shadow features
+</span>
+<br>
+<span style="margin-left: 30px;">(3) ...
+</span>
+<br>
+<br>
+Regarding option (1), future work could rely signed distance fields (SDF) typically found in neural surface reconstruction research. The challenge here
+would be to adapt the per-Gaussian texture sampling and exposure parameters (proposed in the paper) as a 3D neural field, such that as an object moves 
+within the 3D field the lighting reponse changes. This problem can be simplified by assuming that the VS LED wall is static, hence the 3D lighting
+field can be modelled as time-independent. For example, using a neural radiance field (ie.e. a coordinate MLP) would only require inputting the current
+position to return the gamma and mu lighting parameters prodposed in the paper. To deal with local temporal events (i.e. the fourth type of illumination event),
+a dynamic signed distance field could then be employed to handle lighting-based occlusions. This would ideally modify the lighting reponse from the
+3D light fields to account for dynamic shadows and highlights. For filmmaking, we believe this options is the strongest option as, ideally, this solution 
+models 3D lighting field independent of the scene composition. Hence, the step towards instancing new objects, removing objects, or moving objects
+is trivialized as the 3D light field and occlusion model should be capable of handling these types of event.
+<br>
+<br>
+On the other hand, option (2) may provide a stronger approach to fitting a dynamic scene for cases where geometry editing is not desired/necessary.
+The challenge here would be to discover per-Gaussian representation that inherits the prior accomplishments of dynamic GS while also handling with local
+lighting changes. A naive solution to this may involve the hexplane representation which could be used to approximate residual changes in 
+gamma and mu w.r.t time, such that c' = c + gamma(t)*delta_c(mu(t), I_k^B). We could then implicitly deal with occlusions by introducing an 
+additional temporal indensity parameter that models c'' = psi(t) * c'. Still, work would need to be done towards designing a training 
+strategy that is capable of disentangling/constraining gamma(t) and psi(t). Otherwise this naive solution would be prone to overfitting the psi(t) parameter
+as it undergoes a larger degre of gradients flow in comparison to gamma(t), during backpropagation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
 
 <footer class="footer">
   <div class="container">
