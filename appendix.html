@@ -137,23 +137,35 @@
         <h2 class="title is-3" >Contents</h2>
 <ul>
   <li><a href="#relatedwork">1. More on Related Work</a></li>
-  <li><a href="#introduction">2. Full Metrics & Video Results for Baselines </a></li>
-  <li><a href="#ablation">3. Full Ablation Results and Analysis</a></li>
+    <li><a style="margin-left: 30px;" href="#rw_ir">1. More on Inverse Rendering</a></li>
+    <li><a style="margin-left: 30px;" href="#rw_ucipc">2. Unconstrained Illumination in Photo Collections (UIPC)</a></li>
+    <li><a style="margin-left: 30px;" href="#rw_gte">3. Gaussian Splatting Texture Enhancement (GTE)</a></li>
+    
+  <li><a href="#designproxy">2. More on Designing Proxy Baselines </a></li>
+    <li><a style="margin-left: 30px;" href="#2a">A. Bilinear Sampling Smoothness</a></li>
+    <li><a style="margin-left: 30px;" href="#2b">B. Local Smoothness via TriPlanes</a></li>
+    <li><a style="margin-left: 30px;" href="#2c">C. Mahalanobis Screen-space Smoothness</a></li>
+    <li><a style="margin-left: 30px;" href="#2d">D. MipMaps for Multi-scale Textures</a></li>
+    
+  <li><a href="#introduction">3. Per-Dataset and Per-Scene Results for Baseline Experiments </a></li>
+  <li><a href="#ablation">4. Full Ablation Results and Analysis</a></li>
   <li><a style="margin-left: 30px;" href="#exp0">1. Full Ablation Metric Results</a></li>
   <li><a style="margin-left: 30px;" href="#expi">2. Experiments (i-ii) Varying J and K</a></li>
   <li><a style="margin-left: 30px;" href="#expiv">3. Experiments (iii) Ablating the canonical training scheme</a></li>
   
-  <li><a href="#capability">4. Extending VSR Capabilities</a></li>
+  <li><a href="#capability">5. Extending VSR Capabilities</a></li>
   <li><a style="margin-left: 30px;" href="#expiii">1. Optimizing VSR via texture selection</a></li>
 
-  <li><a href="#capability">5. More on the Subjective Study</a></listaticfuture">
+  <li><a href="#substudy">6. More on the Subjective Study</a></listaticfuture">
     
-  <li><a href="#limitations">5. More on Limitations and Future Work</a></li>
+  <li><a href="#limitations">7. More on Limitations and Future Work</a></li>
     <li><a style="margin-left: 30px;" href="#staticfuture">1. Static VSR Problems</a></li>
     <li><a style="margin-left: 30px;" href="#dynamicfuture">2. Dynamic VSR Problems</a></li>
+  
+    <li><a href="#references">References</a></li>
 
 
-  <li><a href="#datacollection">>>> Redirect to Data Method and Collection Page</a></li>
+  <li><a href="#datacollection">>>> Redirect to Data Appendix</a></li>
 
 </ul>
 <br>
@@ -181,7 +193,7 @@
       <img src="static/images/ir_vsr_diagram.png" alt="~Missing Image~"/>
       <br>
       <br>
-      <h2 class="subtitle" style="margin-bottom: 0px;">
+      <h2 class="subtitle" id="rw_ir" style="margin-bottom: 0px;">
 1. More on Inverse Rendering
       </h2>
       <p>
@@ -190,10 +202,10 @@ In the figure above we compare the IR and VSR data requirements, generic Gaussia
 representation, data needs and loss functions. Notably, our method acts independent of Gaussian geometry, does not rely on priors and can be trained using the simple panpotic loss
 function. Futhermore, our method does not require custom CUDA/RTX code and uses the well documented <a href="https://github.com/nerfstudio-project/gsplat">gsplat rasterizer</a>.
       </span>
-        </p>
-        <br>
-        <br>
-              <h2 class="subtitle" style="margin-bottom: 0px;">
+      </p>
+      <br>
+      <br>
+      <h2 class="subtitle" id="rw_ucipc" style="margin-bottom: 0px;">
 2. Unconstrained Illumination in Photo Collections (UIPC)
       </h2>
       <p>
@@ -205,7 +217,7 @@ As a result, UIPC research is mainly focused on dealing with temporal distractor
         </p>
                 <br>
         <br>
-              <h2 class="subtitle" style="margin-bottom: 0px;">
+      <h2 class="subtitle" id="rw_gte" style="margin-bottom: 0px;">
 3. Gaussian Splatting Texture Enhancement (GTE)
       </h2>
       <p>
@@ -220,12 +232,137 @@ Inspired by this work, we extend the deformation model by introducing an intensi
 </section>
 
 
+<section class="section hero is-light" id="designproxy">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">2. More on Designing Proxy Baslines</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+The figure below visualizes the rendering process of the proxy baselines (2A-2D) presented in the main paper.
+      </h2>
+      <img src="static/images/tex_sampling.png" alt="~Missing Image~"/>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="2a">
+A. Bilinear Sampling Smoothness
+      </h2>
+      <p>
+      <span>
+Basline A represents the vanilla approach to texture sampling that is used in practice. The code below demonstrates how this sampling method is applied. 
+      </span>
+      </p>
+      <div class="code-block-container">
+            <pre><code id="bibtex" style="white-space: pre;">
+def sample_tex(I, uv, s, num_levels=3):
+    uv = 2.*uv -1. # Normalize sample coordinates [-1, 1]
+    uv = uv.unsqueeze(0).unsqueeze(0) # Reshape
+    return F.grid_sample(I.unsqueeze(0), uv, mode='bilinear', align_corners=False, padding_mode='border').squeeze(2).squeeze(0).permute(1,0)
+      </code></pre>    
+      </div>
+      <br>
+      <br>
+      <h2 class="subtitle" id="2b" style="margin-bottom: 0px;">
+B. Local Smoothness via TriPlanes
+       </h2>
+      <p>
+      <span>
+This method is inspired by IR works that used neural fields for modelling various lighting/surface parameters. We also chose to use this as 
+it related to various potential options for extending our VSR approach for dynamic scenes. 2B uses the same texture sampling scheme as 2A with the following
+approach for learning the additional lighting parameters. 
+      </span>
+      </p>
+      <div class="code-block-container">
+        <pre><code id="bibtex" style="white-space: pre;">
+self.sample_decoder = nn.Sequential(nn.ReLU(),nn.Linear(net_size, net_size),nn.ReLU(),nn.Linear(net_size, 16*2))
+self.invariance_decoder = nn.Sequential(nn.ReLU(),nn.Linear(net_size, net_size),nn.ReLU(),nn.Linear(net_size, 16*1))    
+...
+features = self.grid(rays_pts_emb[:,:3])
+
+uv = torch.sigmoid(self.sample_decoder(features)).view(-1, 2, 16)
+invariance = torch.sigmoid(self.invariance_decoder(features)).view(-1, 1, 16)
+        </code></pre>    
+      </div>
+
+      <br>
+      <br>
+      <h2 class="subtitle" id="2c" style="margin-bottom: 0px;">
+C. Mahalanobis Screen-space Smoothness
+       </h2>
+      <p>
+      <span>
+This method is inspired by deferred rending techniques that process lighting in image space. The code below shows how this is done and uses the
+same texture sampling function as in A (adapted for handling I_uv as uv coordinate inputs). 
+      </span>
+      </p>
+      <div class="code-block-container">
+        <pre><code id="bibtex" style="white-space: pre;">
+I_lamba = gsplat.render(..., color=invariance)
+I_mu = gsplat.render(..., color=mu)
+I_base = gsplat.render(..., color=colo)
+render = I_base + I_invariance*sample_tex(uv=I_mu, ...)
+        </code></pre>    
+      </div>
+      <br>
+      <br>
+      <h2 class="subtitle" id="2d" style="margin-bottom: 0px;">
+D. MipMaps for Multi-scale Textures
+       </h2>
+      <p>
+      <span>
+This method is an multi-scale extension of 2A inspired by classical graphics approaches to sampling textures using mipmaps. The code below
+shows how <code>sample_tex()</code> is evolved for our mipmap approach.
+      </span>
+      </p>
+      <div class="code-block-container">
+        <pre><code id="bibtex" style="white-space: pre;">
+def generate_mipmaps(I, num_levels=3):
+  maps = [I]    
+  for _ in range(1, num_levels):
+      maps.append(F.interpolate(I, scale_factor=0.5, mode='bilinear', align_corners=False, recompute_scale_factor=True))
+  return maps
+def sample_mipmap(I, uv, s, num_levels=3):
+    maps = generate_mipmaps(I, num_levels=num_levels) # Generate downsampled images
+    uv = (2.*uv -1.).unsqueeze(0).unsqueeze(0) # Normalize and reshape
+    
+    # Determine the lower and upper bounds of the scaling parameter
+    L = s*(num_levels-1.)
+    lower = torch.floor(L).long().clamp(max=num_levels-1)
+    upper = torch.clamp(lower + 1, max=num_levels-1)
+    s_interp = (L - lower.float())
+
+    # Sample mipmaps
+    mip_samples = torch.empty((N, num_levels, 3), device=s.device)    
+    for idx, map in enumerate(maps):
+        mip_samples[:, idx] = F.grid_sample(map, uv, mode='bilinear', align_corners=False, padding_mode='border').squeeze(2).squeeze(0).permute(1,0)
+
+    # For each gaussian linearly interpollate based on s_interp and upper and lower.
+    gather_idx_low  = lower.view(N, 1, 1).expand(-1, 1, 3)
+    gather_idx_high = upper.view(N, 1, 1).expand(-1, 1, 3)
+    colors_low  = torch.gather(mip_samples, 1, gather_idx_low).squeeze(1)   # [N,3]
+    colors_high = torch.gather(mip_samples, 1, gather_idx_high).squeeze(1) 
+
+    return (1. - s_interp) * colors_low + s_interp * colors_high
+        </code></pre>    
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section hero is-light" id="introduction">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">2. Per-Dataset and Per-Scene Results for Baseline Experiments</h2>
+        <h2 class="title is-3">3. Per-Dataset and Per-Scene Results for Baseline Experiments</h2>
 
       </div>
     </div>
@@ -403,7 +540,7 @@ The test data can be split into three categories:
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">3. Ablation Experiments</h2>
+        <h2 class="title is-3">4. Ablation Experiments</h2>
 
       </div>
     </div>
@@ -596,7 +733,7 @@ originating from the fact the canon is unconstrained. The same is true for the s
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">4. Extending VSR Capabilities</h2>
+        <h2 class="title is-3">5. Extending VSR Capabilities</h2>
 
       </div>
     </div>
@@ -719,11 +856,11 @@ associated with Gaussian Splatting tools and research.
 <br>
 <br>
 
-<section class="section hero is-light" id="capability">
+<section class="section hero is-light" id="substudy">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">5. More on Subjective Study</h2>
+        <h2 class="title is-3">6. More on Subjective Study</h2>
 
       </div>
     </div>
@@ -734,7 +871,7 @@ associated with Gaussian Splatting tools and research.
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">6. More on Limitations and Future work</h2>
+        <h2 class="title is-3">7. More on Limitations and Future work</h2>
 
       </div>
     </div>
@@ -811,9 +948,6 @@ Dynamic VSR pipelines that deal with all four events could concievable take a nu
 <span style="margin-left: 30px;">(2) Implicitly modelling per-Gaussian temporal lighting and shadow features
 </span>
 <br>
-<span style="margin-left: 30px;">(3) ...
-</span>
-<br>
 <br>
 Regarding option (1), future work could rely signed distance fields (SDF) typically found in neural surface reconstruction research. The challenge here
 would be to adapt the per-Gaussian texture sampling and exposure parameters (proposed in the paper) as a 3D neural field, such that as an object moves 
@@ -839,6 +973,33 @@ as it undergoes a larger degre of gradients flow in comparison to gamma(t), duri
         </div>
       </div>
 </section>
+<br>
+<br>
+<section class="section hero is-light" id="references">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">References</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<section class="hero is-small">
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+[] 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
 
 <footer class="footer">
   <div class="container">
