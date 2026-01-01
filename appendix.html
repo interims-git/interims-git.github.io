@@ -913,7 +913,7 @@ need for content-aware densifications schemes.
 <br>
 Past this we believe that the initialization of per-Gaussian texture sample coordinates could be improved. When viewing the novel view synthesis results
 with a moving camera we notice view-dependent flickering artifacts. This occurs when the view-dependent change in texture sample coordinates is sensitive 
-and the IBL sample scale is low, i.e. when the Gaussian samples a high-resolution mipmap. For IBL textures high local frequency patterns, this can be 
+and the IBL sample scale is low, i.e. when the Gaussian samples a high-resolution mipmap. For IBL textures with high frequency patterns, this can be 
 detrimental to viewing smoothness. In part this is a dataset limitation - as we only use 18 cameras for training, sparse-view reconstruction
 problems arise leading to view-dependent overfitting. Thus, future work may want to explore methods of smoothing view-dependent features to suppress
 flickering artifacts. 

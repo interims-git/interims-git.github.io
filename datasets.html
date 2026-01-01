@@ -328,10 +328,13 @@ ns-export gaussian-splat --load-config {output/.../config.yml} --output-dir expo
       </h2>
             <p>
         <span style="margin-left: 30px;">
-In our case, there are only 19 views for which require masks so masks were drawn by hand at took around 1-minute per mask. There are however
+In our case, there are only 19 views for which require masks so masks were drawn by hand, which took around 1-minute per mask. There are however
 options to use automated segmentation, such as with <a href="https://ai.meta.com/sam2/">SAM2</a> and <a href="https://ai.meta.com/sam3/">SAM3</a>. Though,
 we should note that there exist abmiguities regarding mask synthesis for transparent objects. In these cases we choose to include 
-the entire glass object within our scene mask, as we intend to model the glass objects as part of the 3D GS scene.
+the entire glass object within our scene mask, as we intend to model the glass objects as part of the 3D GS scene. In principle, the VSR approach should
+be capable of capturing glass - when opacity = 1, base color = 0 and lambda = 1 the resulting primitive should be completely dominated by the pixel color 
+being sampled. We did not investigate this further in the paper as there are some ambiguities about how to design Gaussian scene self-intersection - i.e. when 
+the camera moves into a position where the glass no longer refracts the IBL screen but instead refracts the Gaussian scene itself. 
         </span>
       </p>
     </div>
