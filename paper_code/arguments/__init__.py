@@ -1,0 +1,152 @@
+#
+# Copyright (C) 2023, Inria
+# GRAPHDECO research group, https://team.inria.fr/graphdeco
+# All rights reserved.
+#
+# This software is free for non-commercial, research and evaluation use 
+# under the terms of the LICENSE.md file.
+#
+# For inquiries contact  george.drettakis@inria.fr
+#
+
+from argparse import ArgumentParser, Namespace
+import sys
+import os
+
+class GroupParams:
+    pass
+
+class ParamGroup:
+    def __init__(self, parser: ArgumentParser, name : str, fill_none = False):
+        group = parser.add_argument_group(name)
+        for key, value in vars(self).items():
+            shorthand = False
+            if key.startswith("_"):
+                shorthand = True
+                key = key[1:]
+            t = type(value)
+            value = value if not fill_none else None 
+            if shorthand:
+                if t == bool:
+                    group.add_argument("--" + key, ("-" + key[0:1]), default=value, action="store_true")
+                else:
+                    group.add_argument("--" + key, ("-" + key[0:1]), default=value, type=t)
+            else:
+                if t == bool:
+                    group.add_argument("--" + key, default=value, action="store_true")
+                else:
+                    group.add_argument("--" + key, default=value, type=t)
+
+    def extract(self, args):
+        group = GroupParams()
+        for arg in vars(args).items():
+            if arg[0] in vars(self) or ("_" + arg[0]) in vars(self):
+                setattr(group, arg[0], arg[1])
+        return group
+
+class ModelParams(ParamGroup): 
+    def __init__(self, parser, sentinel=False):
+        self.sh_degree = 3
+        self._source_path = ""
+        self._model_path = ""
+        self._images = "images"
+        self._resolution = -1
+        self._white_background = False
+        self.data_device = "cuda"
+        self.eval = True
+        self.render_process=False
+        self.add_points=False
+        self.extension=".png"
+        self.llffhold=8
+        super().__init__(parser, "Loading Parameters", sentinel)
+
+    def extract(self, args):
+        g = super().extract(args)
+        g.source_path = os.path.abspath(g.source_path)
+        return g
+
+class PipelineParams(ParamGroup):
+    def __init__(self, parser):
+        self.convert_SHs_python = False
+        self.compute_cov3D_python = False
+        self.debug = False
+        super().__init__(parser, "Pipeline Parameters")
+        
+class ModelHiddenParams(ParamGroup):
+    def __init__(self, parser):
+        self.net_width = 64 # width of deformation MLP, larger will increase the rendering quality and decrase the training/rendering speed.
+        self.defor_depth = 1 # depth of deformation MLP, larger will increase the rendering quality and decrase the training/rendering speed.
+        self.bounds = 1.6 
+        self.opacity_lambda = 0.01  # TV loss of temporal grid
+        
+        super().__init__(parser, "ModelHiddenParams")
+        
+class OptimizationParams(ParamGroup):
+    def __init__(self, parser):
+        self.dataloader=False
+        self.zerostamp_init=False
+        self.custom_sampler=None
+        self.iterations = 30_000
+        
+        self.mip_level = 3
+        
+        self.position_lr_init = 0.00016
+        # 3DGS/2DGS learning parameters
+        self.feature_lr = 0.001
+        self.opacity_lr = 0.01
+        self.scaling_lr = 0.005
+        self.rotation_lr = 0.001
+        
+        # Relighting learning parameters
+        self.lambda_lr = 0.0075
+        self.tex_mu_lr = 0.005
+        self.tex_s_lr = 0.0005
+
+        # Regularization
+        self.lambda_dssim = 0.2
+        self.lambda_canon = 0.2
+
+        # Densification
+        self.prune_opa=0.005
+        self.grow_grad2d=0.0001
+        self.grow_scale3d=0.02
+        self.grow_scale2d=0.1
+        self.prune_scale3d=0.1
+        
+        
+        self.weight_constraint_init= 1
+        self.weight_constraint_after = 0.2
+        self.weight_decay_iteration = 5000
+        
+        self.opacity_reset_interval = 3000
+        self.densification_interval = 500
+        
+        self.densify_from_iter = 3000
+        self.densify_until_iter = 10_000
+
+        self.batch_size=1
+        
+        self.add_point=False
+        super().__init__(parser, "Optimization Parameters")
+
+def get_combined_args(parser : ArgumentParser):
+    cmdlne_string = sys.argv[1:]
+    cfgfile_string = "Namespace()"
+    args_cmdline = parser.parse_args(cmdlne_string)
+
+    try:
+        cfgfilepath = os.path.join(args_cmdline.model_path, "cfg_args")
+        print("Looking for config file in", cfgfilepath)
+        with open(cfgfilepath) as cfg_file:
+            print("Config file found: {}".format(cfgfilepath))
+            cfgfile_string = cfg_file.read()
+    except TypeError:
+        print("Config file not found at")
+        pass
+    args_cfgfile = eval(cfgfile_string)
+
+    merged_dict = vars(args_cfgfile).copy()
+    for k,v in vars(args_cmdline).items():
+        if v != None:
+            merged_dict[k] = v
+    return Namespace(**merged_dict)
