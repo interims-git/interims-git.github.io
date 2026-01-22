@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting</title>
+  <link rel="icon" type="image/x-icon" href="static/images/icon.JPG">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting
+            </h1>
+            <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="" target="_blank">Anonymous Submission</a>
+                </span>
+    
+            </div>
+              <span class="link-block">
+                  <a href="index.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Showcase</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="paper_info.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Paper Info</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="datasets.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </a>
+              </span>
+              
+              <span class="link-block">
+                  <a href="appendix.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Appendix</span>
+                </a>
+              </span>
+
+              <!-- Github link -->
+            <span class="link-block">
+                <a href="https://github.com/interims-git/interims-git.github.io"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+                
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+This paper introduces a Gaussian Splatting (GS) approach to relighting and reconstructing 3D scenes containing real in-camera 
+image-based lighting (RIC-IBL) sources. This is applied Virtual Studio (VS) film production, where LED walls project live virtual
+backgrounds that produce RIC-IBL effects. The goal of VS reconstruction and relighting (VSR) is to provide the ability to change 
+the RIC-IBL background texture and propagate the lighting changes to a 3-D scene. As no prior RIC-IBL research exists, this paper 
+establishes a robust platform for future work by introducing a novel pipeline, a handful of baselines for RIC-IBL texture sampling, 
+and several datasets including real VS scenes. The main method is a geometry-independent lighting model that explicitly represents 
+the IBL texture coordinates and lighting intensity as view-dependent GS parameters. This avoids computing physically-based events 
+linked to inverse rendering (IR). Hence, our method does not rely on depth/normal priors, is capable of reconstructing diverse
+scenes including transparent objects, and can be implemented without custom CUDA or RTX code. In practice, our method removes the need 
+for costly VS-specific hardware and offers 
+numerous possibilities for revolutionizing the VS production process to benefit post production artistry.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+    <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+           <h2 class="subtitle has-text-centered">
+            Showcasing Novel View and Lighting Synthesis for VS scenes (Dataset 1 Scene 1)
+          </h2>
+              <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+              <p>
+We propose a new VP workflow/pipeline. The output is a fully controllable photorealistic IBL light simulation and 3-D Gaussian Splatting
+scene, reconstructed from multi-view footage of a VP stage under varying IBL conditions. 
+We attempt to precisely match the simulated IBL exposure setting to the real VP LED stage, meaning that what you see in simulation
+should be a replica of realisty.
+              </p>
+              <br>
+          </div>
+        </div>
+      </div>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/showcase.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+<div class="item item-video2">
+           <h2 class="subtitle has-text-centered">
+            Showcasing Novel View and Lighting Synthesis for VS scenes (Dataset 2 Scene 3)
+          </h2>
+        <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+              <p>
+We test this on a variety of LCD and LED set-ups. Whether its a full VP stage, a minature set or a minor IBL source (TV, monitort etc.), our method
+attempts to simulate the 3-D scene and light field in post without inheriting the capture artifacts related to photographing luminous screens with
+video camera settings (low ISO, shallow color bandwith etc.). This means no more overly expensive capture equiptment... 
+              </p>
+              <br>
+          </div>
+        </div>
+      </div>
+<iframe
+  width="100%"
+  height="480"
+  src="https://www.youtube.com/embed/FFgZhMLaXAE"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+    <h2 class="subtitle has-text-centered">
+      Live background & lighting design for VP 
+    </h2>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+              <p>
+By simulating the VP set using our Gaussian Splatting pipeline users can design, edit and modify 
+the background textures in real-time and without even visiting the VP set. This example was 
+streamed from Photoshop.
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+    <iframe 
+      width="100%" 
+      height="480"
+src="https://www.youtube.com/embed/z8YZhX7JfDU"
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen>
+    </iframe>
+
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+    <h2 class="subtitle has-text-centered">
+      Estimating the real IBL Exposure Settings
+    </h2>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+              <p>
+By capturing the real IBL exposure setting (with lambda) we can modify this parameter to control
+the intesity of the IBL screen on the remainder of the scene. Future applications could extend this to localized
+exposure modifications based on material properties to enhance artistic feel. Such effects include vignetting, contrast adjustments and
+saturation adjustments and hue-based exposure suppression (e.g. enhancing red values while desaturating blue colors).
+
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+    <video
+      width="100%"
+      height="480"
+      controls
+      preload="metadata"
+      playsinline
+    >
+      <source src="static/videos/exposure.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+
+
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+
+      <h2 class="subtitle has-text-centered">
+    Novel View Synthesis Capabilities 
+      </h2>
+      <p class="is-centered has-text-centered">
+    Our VSR pipeline produces a 3-D Gaussian Splatting scene so novel views can be tested for lighting design quality. Future
+    work on dynamic VSR could use this to capture cinematic shots in simulation. Compared to capturing 
+    the final shot during production, this would trivialize capturing complex shots while being equiptment-free (low cost). 
+      </p>
+      <br>
+<iframe
+  width="100%"
+  height="480"
+  src="https://www.youtube.com/embed/RJnTqLVxGN0"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  
+  <div class="hero-body">
+    <div class="container">
+      <br>
+  <h2 class="subtitle has-text-centered">
+    Editable IBL Goemetry (post-training) & Video IBL Synthesis Examples (end of video) 
+  </h2>
+
+        <div >
+            <iframe 
+              width="100%" 
+              height="480" 
+              src="https://www.youtube.com/embed/BFMnmgDFOGA" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small"  id="expiv">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel1" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+Main Results on Dataset 3 Scene 1
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480" 
+            src="https://www.youtube.com/embed/CAJRTKDM98I" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+Main Results on Dataset 3 Scene 2
+          </h2>
+          <iframe
+            width="100%"
+            height="480"
+            src="https://www.youtube.com/embed/6YpRASXf-Yc"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="item item-video3">
+          <h2 class="subtitle has-text-centered">
+Main Results on Dataset 3 Scene 3
+          </h2>
+          <iframe
+            width="100%"
+            height="480"
+            src="https://www.youtube.com/embed/UENl_8E3R98"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{...}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+
+<!-- End image carousel -->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to that page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>

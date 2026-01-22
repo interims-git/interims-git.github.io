@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting</title>
+  <link rel="icon" type="image/x-icon" href="static/images/icon.JPG">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting
+            </h1>
+            <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="" target="_blank">Anonymous Submission</a>
+                </span>
+    
+            </div>
+              <span class="link-block">
+                  <a href="index.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Showcase</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="paper_info.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Paper Info</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="datasets.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </a>
+              </span>
+              
+              <span class="link-block">
+                  <a href="appendix.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Appendix</span>
+                </a>
+              </span>
+
+              <!-- Github link -->
+            <span class="link-block">
+                <a href="https://github.com/interims-git/interims-git.github.io"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+                
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        Abstract:
+          <br>
+        <div class="content has-text-justified">
+          <p>
+Virtual production (VP) has emerged as an effective means of film production. A VP studio combines the capture of real 
+foreground material with virtual backgrounds displayed on LED walls. While supporting image-based lighting (IBL) and  
+in-camera visual effects (VFX), VP constrains lighting at capture-time, making downstream VFX non-trivial. Moreover, 
+stage lighting is coupled to LED wall pose and display settings, limiting pre-visualization and leading to costly 
+re-shoots when creative intent is not met. We address these challenges by introducing a VP 3D scene reconstruction and 
+relighting (VSR) pipeline. This enables pre-visualization and post-capture modification of LED wall content and settings 
+while faithfully propagating the corresponding lighting effects to foreground objects.
+We propose an unconstrained, geometry-independent Gaussian Splatting (GS) lighting model that encodes IBL texture sample 
+coordinates and lighting intensities as deformable view-dependent Gaussian parameters. By avoiding ray transmission functions, 
+we eliminate the need for depth or normal priors, naturally support transparency and reflections, and do not require custom 
+CUDA/RTX code. Our representation is compact and efficient, requiring under 5 GB of RAM and VRAM to train 1080p scenes in 
+under 2 hours. Objective and perceptual evaluations demonstrate state-of-the-art reconstruction and relighting capabilities, 
+and shows that mip-map based IBL texture sampling outperforms other baselines by up to 3 dB in PSNR and 0.04 in SSIM. We 
+show that in practice our approach reduces the reliance on VP-specific hardware and enables greater creative flexibility 
+in both pre- and post- production.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <img src="static/images/main.png" alt="~Missing Image~"/>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+        This primary focus is to tackle relighting scenes that contain real in-camera IBL (RIC-IBL) sources by:
+      </h2>
+      <p>
+        <span style="margin-left: 50px;">
+          (1) Introducing a new 3-D reconstruction and relighting pipeline - using Gaussian Splatting
+        </span>
+        <br>
+        <span style="margin-left: 50px;">
+          (2) Producing a several <a href="datasets.html">datasets</a> to support future work
+        </span>
+      </p>
+      <br>
+      <br>
+
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+        This application area is Virtual Production (VP) as:
+      </h2>
+      <p>
+        <span style="margin-left: 50px;">
+          (1) VP relies on RIC-IBL sources for in-camera lighting effects 
+        </span>
+        <br>
+        <span style="margin-left: 50px;">
+          (2) VP is extremely costly and so the proposed model works towards more accessible filmmaking 
+        </span>
+        <br>
+        <span style="margin-left: 50px;">
+          (3) VP technology is primitive with a high reliance on pre-production and background and lighting design. So, production pipelines do not yet
+          consider the variety of tasks that could be automated. This includes photorealistic footage relighting.
+        </span>
+      </p>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+        As we tie together Graphics, VS filmmaking and Gaussian Splatting, it is important to outline what this paper <i>is</i> and <i>is not</i>.
+        <br>
+        <br>
+        This paper is:
+      </h2>
+      <p>
+        <span style="margin-left: 50px;">
+          (1) An attempt to provide lighting editability and customisability in post-production  
+        </span>
+        <br>
+        <span style="margin-left: 50px;">
+          (2) An novel attempt at VSR with a focus on producing arbitrary output variables (AOVs)
+        </span>
+        <br>
+        <span style="margin-left: 50px;">
+          (3) A geometry-independent approach to relighting real static 3-D scenes using Gaussian Splatting
+        </span>
+        <br>
+        <span style="margin-left: 50px;">
+          (4) Attempting to provide additional baselines to support objective studies and future work
+        </span>
+      </p>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+        This paper is not:
+      </h2>
+      <p>
+        <span style="margin-left: 50px;">
+          (1) An approach to 3-D inverse rendering - we <i>do not</i> model material properties like albedo/roughness
+        <br>
+        <span style="margin-left: 50px;">
+          (2) A synthetic lighting pipeline for GS - we do not rely on synthetic light sources for relighting
+        </span>
+        <br>
+        <span style="margin-left: 50px;">
+          (3) An active solution to VSR. This is new research - a couple of steps exist between here and actual application.
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{...}</code></pre>
+  </div>
+</section>
+<!--End BibTex citation -->
+
+
+
+<!-- End image carousel -->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to that page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>

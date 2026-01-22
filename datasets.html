@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting</title>
+  <link rel="icon" type="image/x-icon" href="static/images/icon.JPG">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting
+            </h1>
+            <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="" target="_blank">Anonymous Submission</a>
+                </span>
+    
+            </div>
+              <span class="link-block">
+                  <a href="index.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Showcase</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="paper_info.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Paper Info</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="datasets.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </a>
+              </span>
+              
+              <span class="link-block">
+                  <a href="appendix.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Appendix</span>
+                </a>
+              </span>
+
+              <!-- Github link -->
+            <span class="link-block">
+                <a href="https://github.com/interims-git/interims-git.github.io"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+                
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div>
+  <a style="position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 155px;
+  height: 30px;
+  font-size: 25px;
+  z-index: 3;
+  text-align: center;" href="#contents">^Contents</a>
+</div>
+
+<section class="section hero" id="contents" style="padding-top:0px;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered ">
+      <div class="column is-four-fifths" >
+        <h2 class="title is-3" >Contents</h2>
+<ul>
+  <li><a href="https://drive.google.com/drive/folders/1VBBjTOb6gVEkLevtMpoUDA7GokchDorc?usp=drive_link">0. Google Drive</a>
+</li>
+  <li><a href="#datasetstructure">1. Dataset Structure & Initialization</a></li>
+      <li><a style="margin-left: 30px;" href="#strcutrOultine">1. Structure outline</a></li>
+      <li><a style="margin-left: 30px;" href="#estimatescene">2. Estimating Camera Parameters and Training the Initial Scene</a></li>
+      <li><a style="margin-left: 30px;" href="#masksynth">3. Mask Synthesis</a></li>
+
+  <li><a href="#captureplan">2. Capture Planning</a></li>
+    <li><a style="margin-left: 30px;" href="#selectingposes">1. Establishing Dimensionality and Selecting Poses for Capture </a></li>
+    <li><a style="margin-left: 30px;" href="#textureselection">2. Selecting Textures based on Capture Limitations</a></li>
+    <li><a style="margin-left: 30px;" href="#dynamicoptions">3. Potential Options for Dynamic Scene Capture</a></li>
+  <li><a href="#duringcapture">3. During Capture: Practical Tips & Tricks</a></li>
+    <li><a style="margin-left: 30px;" href="#singelcam">1. Static scenes with single camera</a></li>
+    <li><a style="margin-left: 30px;" href="#multicam">2. Static scenes with multiple cameras</a></li>
+
+</ul>
+<br>
+<br>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        Overview
+          <br>
+        <div class="content has-text-justified">
+          <p>
+In the paper we present an approach to capturing a scene under varying RIC-IBL illuminations. This section presents the dataset and extends the discussion to include
+future work on capturing dynamic content. This also feeds into our extended discussion on future work in the <a href="appendix.html" style="color: blue;">Appendix</a>.
+<br>
+We captured three datasets under 99 different RIC-IBL illuminations. Each dataset comprises 18 training cameras and 1 test camera. Additional views (>100) of the canonical scene
+were captured. While these were not used in the main paper, they could be used in future works to evaluate reconstruction quality by testing the 
+canonical scene.
+
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser video-->
+
+<section class="hero is-small"  id="expiv">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+All 18 training views for Dataset 1
+          </h2>
+<iframe 
+  width="100%" 
+  height="480" 
+  src="https://www.youtube.com/embed/CAJRTKDM98I" 
+  title="YouTube video player" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  allowfullscreen>
+</iframe>
+        </div>
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+All 18 training views for Dataset 1
+          </h2>
+<iframe 
+  width="100%" 
+  height="480" 
+  src="https://www.youtube.com/embed/CAJRTKDM98I" 
+  title="YouTube video player" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  allowfullscreen>
+</iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+<section class="section hero is-light" id="datasetstructure">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">1. Dataset Structure</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero teaser" id="strcutrOultine">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+1. The structure of each dataset is shown below.
+      </h2>
+              <div class="code-block-container">
+            <pre><code id="bibtex" style="white-space: pre;">
+[Dataset Name]/
+├──transforms.json # Intrinsics, Extrinsics and Camera/IBL meta data
+├──images/ # Images used for intrinsice and extrinsic pose estimation
+| # Note that in Dataset 1 we use 161 additional views of the canonical scene
+| # to predict better poses. The last 19 frames correspond to cam01-cam19.
+│   ├──frame_00001.jpg
+│   ├──frame_00002.jpg
+│   ...
+│   └──frame_XXXXX.jpg
+├──splat/
+│   └──splat.ply # The ply generated using the Splatfacto
+└──meta/
+    ├──backgrounds/ # IBl background textures
+    |    ├── 001.png 
+    |    ├── 002.png
+    |    ...
+    |    └── YYY.png
+    ├──images/ # IBl background textures
+    |    ├──cam01
+    |    |    ├──001.png
+    |    |    ...
+    |    |    └──YYY.png
+    |    ...
+    |    └──cam19
+    |    |    ├──001.png
+    |    |    ...
+    |    |    └──YYY.png
+    └──masks/ # IBl background textures
+         ├──cam01.png
+         ...
+         └──cam19.png
+
+            </code></pre>    
+        </div>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="estimatescene">
+2. Estimating Camera Parameters and Training the Initial Scene
+      </h2>
+      <p>
+        <span style="margin-left: 30px;">
+First prepare a folder containing you multi-view images. Then download and install <a href="https://docs.nerf.studio/" style="color: blue;">nerfstudio</a>.
+Use the follwoing command to generate poses and intrinsic information. This may fail for datasets with few cameras or limited color bandwidths. In these
+cases, we suggest capturing additional views to improve pose estimates.
+        </span>
+      <br>
+      <code>ns-process-data images --data {DATA_PATH} --output-dir {PROCESSED_DATA_DIR}</code> 
+      <br>
+      <span style="margin-left: 30px;">
+Afterwards, a Splatfacto model is trained using the following command.
+        </span>
+        <br>
+      <code>ns-train splatfacto --data data/nerfstudio/poster --load-dir {outputs/.../nerfstudio_models}</code> 
+              <br>
+      <span style="margin-left: 30px;">
+After training, the following commands are used to extract the camera poses and initial splat.
+        </span>
+        <div class="code-block-container">
+            <pre><code id="bibtex" style="white-space: pre;">
+ns-export cameras --load-config {output/.../config.yml} --output-dir exports/
+ns-export gaussian-splat --load-config {output/.../config.yml} --output-dir exports/
+            </code></pre>    
+        </div>
+      </p>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="masksynth">
+3. Mask Synthesis
+      </h2>
+            <p>
+        <span style="margin-left: 30px;">
+In our case, there are only 19 views for which require masks so masks were drawn by hand, which took around 1-minute per mask. There are however
+options to use automated segmentation, such as with <a href="https://ai.meta.com/sam2/">SAM2</a> and <a href="https://ai.meta.com/sam3/">SAM3</a>. Though,
+we should note that there exist abmiguities regarding mask synthesis for transparent objects. In these cases we choose to include 
+the entire glass object within our scene mask, as we intend to model the glass objects as part of the 3D GS scene. In principle, the VSR approach should
+be capable of capturing glass - when opacity = 1, base color = 0 and lambda = 1 the resulting primitive should be completely dominated by the pixel color 
+being sampled. We did not investigate this further in the paper as there are some ambiguities about how to design Gaussian scene self-intersection - i.e. when 
+the camera moves into a position where the glass no longer refracts the IBL screen but instead refracts the Gaussian scene itself. 
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" id="captureplan">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">2. Capture Planning</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+In the paper we rely on the datacapture methodology presented below to produce our three datasets under varying illumination. We only used a single camera
+for capturing scenes which takes considerably longer to accomplish. To support others in similar situations we will present tips and tricks below.
+      </h2>
+      <br>
+      <img src="static/images/datacollection.png" alt="~Missing Image~"/>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="selectingposes">
+1. Establishing Dimensionality and Selecting Poses for Capture 
+      </h2>
+      <p>
+        <span style="margin-left: 30px;">
+On a scale of 2.5D to 3D, how 3D do you want you data? Capturing VP content limits data to proscenium views, so full 3D is not possible unless you are able 
+to insert cameras into the LED wall. However, a large spread of cameras around the 2.5D scene will enable you to infer a greater range of novel views. Hence, 
+the distribution of cameras directly affects the type of shots that can be captured. However, if you are running on a tight budget and have few cameras, 
+as in our case, a wide distribution will results in worse reconstruction results so will negatively impact the quality of the final show. Clearly, related
+works on sparse-view reconstruction becomes relevant, though we leave this for future work to investigate optimizing reconstruction quality under sparse-view conditions
+; as discussed in the <a href="appendix.html" style="color: blue;">Appendix</a>.
+        </span>
+        <br>
+        <span style="margin-left: 30px;">
+In our case, with 18 training views, the radial spread of cameras for each datase is under 135Deg. We find that the geometric reconstruction quality for 
+Dataset 1 and 2 is decent while for Dataset 3 shows various view-dependent geometry artifacts. The reason Dataset 3 fails to avoid over-fitting artifacts is
+due to scale of the important foreground objects, w.r.t the remainder of the scene. In Dataset 1 and 2, the coverage of the tables that the objects sit onto
+is rougly propotional to the volume of the target objects. Whereas, in Dataset 3 the coverage of the floor is significantly grater than that of the objects, 
+therefore much less resources are attributed to target objects during training (under our loss scheme). This highlights a potential need for future work
+to establish a means of attributing larger gradients to areas of higher importance, as simply using the panoptic loss function (as we have done) is not sufficient.    
+        </span>
+        <br>
+        <span style="margin-left: 30px;">
+Therefore, when designing data capture you will need to consider the radial spread w.r.t the number of cameras you have as well as the pixel coverage
+of the target objects in comparison to the remainder of the 3-D scene. You however, do not need to consider the pixel coverage of the LED wall/RIC-IBL
+source as this is masked out during training.   
+        </span>
+
+      </p>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="textureselection">
+2. Selecting Textures based on Capture Limitations
+      </h2>
+      <p>
+        <span style="margin-left: 30px;">
+Following the conclusions reached in the paper regarding RIC-IBL texture diversity for improving VSR, ideally users would select a large set of high frequency
+backgrounds to illuminate the scene during capture. However, this is not always feasible, especially when dealing with dynamic content (in future applications).
+Therefore, the optimal approach uses a sparse set of RIC-IBL textures to illuminate the scene for training (when K-> 1), where the textures used are locally unique and 
+high in frequency density. However, this does not actually  have to be the case. For example, if you indend on capturing a specific background composition (e.g. a
+low laying mountainous landscape), but have not yet decided what it will look like, it may be more effective and less probelamtic to simply capture the 
+3D scene under illumination conditions (i.e. RIC-IBL textures) that align with the expected background content.
+        </span>
+      </p>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="dynamicoptions">
+3. Potential Options for Dynamic Scene Capture
+      </h2>
+      <p>
+        <span style="margin-left: 30px;">
+The main limitation with capturing dynamic scene under varying illumination is that changing the RIC-IBL background throughout a performance will distract 
+the actor and potentiall lead to worse performances. Hence, there are various approaches to capture and reconstruction that cmay preserve actor immersion.
+        </span>
+        <br>
+        <span style="margin-left: 30px;">
+First, the use of dynamic/video backgrounds naturally provides texture diversity without significantly changing the background content. In this case, the degree of frame differences is tied to the diversity of the texture, as not all dynamic changes may be significant enough to support the amount of texture diversity our method requires for VSR. In relation to the conclusions reached in the paper, future work could invesigate the perceptual challenge of designing dynamic backgrounds that preserve actor immersion while enahncing reconstruction quality.
+        </span>
+        <br>
+        <span style="margin-left: 30px;">
+Second, the paper demonstrates that VSR still produces acceptable results using the K=1 capture condition. This requires capturing the scene with (1)
+no RIC-IBL illumination and (2) with RIC-IBL illuminations. In this case, we note that the VSR pipeline was initially designed to support downstream
+dynamic applications - the design of the <i>canonical</i> representation is no coincidence. Most current dynamic GS methods operate using deformation
+fields that model residual changes w.r.t a canonical representations. In many cases, the canonical representation models a specific point in time t=T seconds.
+This could be taken advantage of by capturing a canonical (unlit) representation e.g. at t=0s. The LED background could then be switched on for the remainder 
+of the shot t>0s, to satisfy the K=1 VSR condition. In principle the canon event could even be captured some time before t=0s, which would allow for a short pause in acting prior
+to the illuminated performance while the LED wall is switched on (we experience a 10-20s delay with Partner-A's VS wall). Practical equivalents already
+exist for this type of capture policy, whereby numerous studios already propose generating 3D assets of human actors prior to filming, then using the filmed
+content to rig the human asset.
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section hero is-light" id="duringcapture">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">3. During Capture: Practical Tips & Tricks</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="singelcam">
+1. Static scenes with single camera
+      </h2>
+      <p>
+        <span style="margin-left: 30px;">
+For tight budgets, mutli-view cameras may not be feasible. Though with static scenes this can be easily sinulated with the following. 
+First, prepare a video/frame squence of the background textures, where every 10 frames the background changes, and the video plays at 
+30FPS. When you capture the scene play the video and film the scene from a fixed viewing angle using 30FPS camera settings. Repeat this 
+for all the fixed views you want. During post processing, you can then use a simple bash or python script to select every 10 frames, 
+with an offset of 5 frames to prevent selecting frames where the background is refreshing. We did this for all three datasets and were 
+able to capture the 18 views in under 20 minutes.
+        </span>
+        <br>
+         <span style="margin-left: 30px;">
+Consequently, capturing videos instead of images requires a understanding the ISO and rolling shutter settings. As the background content is
+ultimately replaced, we do not need to consider the in-camera exposure level of the background LED wall. This means that when selecting 
+the right ISO/shutter speed, we only need to consider the exposure levels originating from the foreground. Most cameras 
+conveniently have the zebra functionality, where pixel regions with >95% exposure are overlayed with stripes in-camera. We recomend using this
+to select an ISO setting this is both visually appealing and allows for a high bandwidth of colors and illuminations in the foreground. Though,
+we note that as AOVs are synthesizable via our VSR pipeline, the visual look of the scene can dapated downstream in post production, so in principle
+we suggest simply focusing on high bandwidths to support reconstruction quality. For those not familiar with 3D reconstruction, increasing the exposure/color 
+bandwidths allows for a greater range of colors to be learned during reconstruction. This makes modelling highly textured materials easier as 
+the change in material textures is more apprent under higher bandwidths. 
+        </span>
+      </p>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="multicam">
+2. Static scenes with multiple cameras
+      </h2>
+      <p>
+        <span style="margin-left: 30px;">
+This is relatively simple and the fastest appraoch. If you prepared a video of the background textures, as outlined above, you could use a 
+clapboard to sync the captured videos and implement a bash or python script that automatically selects every 10th frame with a 5 frame offset (as previously discussed).
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- End image carousel -->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to that page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>

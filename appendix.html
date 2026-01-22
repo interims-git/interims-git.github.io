@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting</title>
+  <link rel="icon" type="image/x-icon" href="static/images/icon.JPG">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+<section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              VSR: Virtual studio 3-D reconstruction and relighting with real image-based relighting
+            </h1>
+            <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="" target="_blank">Anonymous Submission</a>
+                </span>
+    
+            </div>
+              <span class="link-block">
+                  <a href="index.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Showcase</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="paper_info.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Paper Info</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="datasets.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </a>
+              </span>
+              
+              <span class="link-block">
+                  <a href="appendix.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </span>
+                  <span>Appendix</span>
+                </a>
+              </span>
+
+              <!-- Github link -->
+            <span class="link-block">
+                <a href="https://github.com/interims-git/interims-git.github.io"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+                
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div>
+  <a style="position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 155px;
+  height: 30px;
+  font-size: 25px;
+  text-align: center;" href="#contents">^Contents</a>
+</div>
+
+<section class="section hero" id="contents">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered ">
+      <div class="column is-four-fifths" >
+        <h2 class="title is-3" >Contents</h2>
+<ul>
+  <li><a href="#relatedwork">1. More on Related Work</a></li>
+    <li><a style="margin-left: 30px;" href="#rw_ir">1. More on Inverse Rendering</a></li>
+    <li><a style="margin-left: 30px;" href="#rw_ucipc">2. Unconstrained Illumination in Photo Collections (UIPC)</a></li>
+    <li><a style="margin-left: 30px;" href="#rw_gte">3. Gaussian Splatting Texture Enhancement (GTE)</a></li>
+    
+  <li><a href="#designproxy">2. More on Designing Proxy Baselines </a></li>
+    <li><a style="margin-left: 30px;" href="#2a">A. Bilinear Sampling Smoothness</a></li>
+    <li><a style="margin-left: 30px;" href="#2b">B. Local Smoothness via TriPlanes</a></li>
+    <li><a style="margin-left: 30px;" href="#2c">C. Mahalanobis Screen-space Smoothness</a></li>
+    <li><a style="margin-left: 30px;" href="#2d">D. MipMaps for Multi-scale Textures</a></li>
+    
+  <li><a href="#introduction">3. Per-Dataset and Per-Scene Results for Baseline Experiments </a></li>
+  <li><a href="#ablation">4. Full Ablation Results and Analysis</a></li>
+  <li><a style="margin-left: 30px;" href="#exp0">1. Full Ablation Metric Results</a></li>
+  <li><a style="margin-left: 30px;" href="#expi">2. Experiments (i-ii) Varying J and K</a></li>
+  <li><a style="margin-left: 30px;" href="#expiv">3. Experiments (iii) Ablating the canonical training scheme</a></li>
+  
+  <li><a href="#capability">5. Extending VSR Capabilities</a></li>
+  <li><a style="margin-left: 30px;" href="#expiii">1. Optimizing VSR via texture selection</a></li>
+
+  <li><a href="#substudy">6. More on the Subjective Study</a></listaticfuture">
+    
+  <li><a href="#limitations">7. More on Limitations and Future Work</a></li>
+    <li><a style="margin-left: 30px;" href="#staticfuture">1. Static VSR Problems</a></li>
+    <li><a style="margin-left: 30px;" href="#dynamicfuture">2. Dynamic VSR Problems</a></li>
+  
+    <li><a href="#references">References</a></li>
+
+
+  <li><a href="#datacollection">>>> Redirect to Data Appendix</a></li>
+
+</ul>
+<br>
+<br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" id="relatedwork">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">1. More on Related Works</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <img src="static/images/ir_vsr_diagram.png" alt="~Missing Image~"/>
+      <br>
+      <br>
+      <h2 class="subtitle" id="rw_ir" style="margin-bottom: 0px;">
+1. More on Inverse Rendering
+      </h2>
+      <p>
+      <span>
+In the figure above we compare the IR and VSR data requirements, generic Gaussian primitives, rendering pipeline and training scheme. There are clear differences regarding
+representation, data needs and loss functions. Notably, our method acts independent of Gaussian geometry, does not rely on priors and can be trained using the simple panpotic loss
+function. Futhermore, our method does not require custom CUDA/RTX code and uses the well documented <a href="https://github.com/nerfstudio-project/gsplat">gsplat rasterizer</a>.
+      </span>
+      </p>
+      <br>
+      <br>
+      <h2 class="subtitle" id="rw_ucipc" style="margin-bottom: 0px;">
+2. Unconstrained Illumination in Photo Collections (UIPC)
+      </h2>
+      <p>
+      <span>
+UIPC research focuses on 3D scene relighting for unconstrained photo collections. This mainly involves reconstructing landmarks from data that is scraped from social media websites, so contains seasonal appearance captured over different periods of the day and year. Here, 3D relighting pipelines are expected to interpolate between the variable lighting as well as deal with various geometric capture conditions. UIPC shares similarity with our VSR paradigm, as VSR also ingests a dataset with variable light conditions. The difference lies with the research objective, as UIPC pipelines mainly focus on dealing with explicit geometric uncertainties related to the unconstrained photo collections. For example, the XX landmark dataset is composed of images scraped from social media so the data contains distractors, like transient humans or vehicles or animals. Instead, our method aims to capture implicit geometric phenomena to support unseen lighting conditions, i.e. when a new background texture is introduces. 
+
+As a result, UIPC research is mainly focused on dealing with temporal distractors that arise from, As the main paradigm of VSR regards the approach to IBL texture sampling, there is not much inspiration that can gained from comparing VSR to UIPC.
+      </span>
+        </p>
+                <br>
+        <br>
+      <h2 class="subtitle" id="rw_gte" style="margin-bottom: 0px;">
+3. Gaussian Splatting Texture Enhancement (GTE)
+      </h2>
+      <p>
+      <span>
+GTE research mainly focuses on anti-aliasing problems for generic scene reconstruction, not relighting. GTE focuses on novel ray-Gaussian intersection schemes that allow for Gaussian sub-sampling - enhancing the expressivity of the scene. Thus, GTE research remains unrelated to the VSR texture sampling. However, TexGS proposes a Gaussian sub-sampling method that samples a ground truth RGBA texture per-Gaussian. TexGS adopts a color deformation scheme akin to dynamic GS reconstruction, replacing the temporal color residual with a view-dependent color residual. 
+
+Inspired by this work, we extend the deformation model by introducing an intensity parameter that modifies the magnitude of the deformation, independent of IBL texture. This essentially models a static exposure setting, which future work could explore for scene editing applications. 
+      </span>
+        </p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light" id="designproxy">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">2. More on Designing Proxy Baslines</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;">
+The figure below visualizes the rendering process of the proxy baselines (2A-2D) presented in the main paper.
+      </h2>
+      <img src="static/images/tex_sampling.png" alt="~Missing Image~"/>
+      <br>
+      <br>
+      <h2 class="subtitle" style="margin-bottom: 0px;" id="2a">
+A. Bilinear Sampling Smoothness
+      </h2>
+      <p>
+      <span>
+Basline A represents the vanilla approach to texture sampling that is used in practice. The code below demonstrates how this sampling method is applied. 
+      </span>
+      </p>
+      <div class="code-block-container">
+            <pre><code id="bibtex" style="white-space: pre;">
+def sample_tex(I, uv, s, num_levels=3):
+    uv = 2.*uv -1. # Normalize sample coordinates [-1, 1]
+    uv = uv.unsqueeze(0).unsqueeze(0) # Reshape
+    return F.grid_sample(I.unsqueeze(0), uv, mode='bilinear', align_corners=False, padding_mode='border').squeeze(2).squeeze(0).permute(1,0)
+      </code></pre>    
+      </div>
+      <br>
+      <br>
+      <h2 class="subtitle" id="2b" style="margin-bottom: 0px;">
+B. Local Smoothness via TriPlanes
+       </h2>
+      <p>
+      <span>
+This method is inspired by IR works that used neural fields for modelling various lighting/surface parameters. We also chose to use this as 
+it related to various potential options for extending our VSR approach for dynamic scenes. 2B uses the same texture sampling scheme as 2A with the following
+approach for learning the additional lighting parameters. 
+      </span>
+      </p>
+      <div class="code-block-container">
+        <pre><code id="bibtex" style="white-space: pre;">
+self.sample_decoder = nn.Sequential(nn.ReLU(),nn.Linear(net_size, net_size),nn.ReLU(),nn.Linear(net_size, 16*2))
+self.invariance_decoder = nn.Sequential(nn.ReLU(),nn.Linear(net_size, net_size),nn.ReLU(),nn.Linear(net_size, 16*1))    
+...
+features = self.grid(rays_pts_emb[:,:3])
+
+uv = torch.sigmoid(self.sample_decoder(features)).view(-1, 2, 16)
+invariance = torch.sigmoid(self.invariance_decoder(features)).view(-1, 1, 16)
+        </code></pre>    
+      </div>
+
+      <br>
+      <br>
+      <h2 class="subtitle" id="2c" style="margin-bottom: 0px;">
+C. Mahalanobis Screen-space Smoothness
+       </h2>
+      <p>
+      <span>
+This method is inspired by deferred rending techniques that process lighting in image space. The code below shows how this is done and uses the
+same texture sampling function as in A (adapted for handling I_uv as uv coordinate inputs). 
+      </span>
+      </p>
+      <div class="code-block-container">
+        <pre><code id="bibtex" style="white-space: pre;">
+I_lamba = gsplat.render(..., color=invariance)
+I_mu = gsplat.render(..., color=mu)
+I_base = gsplat.render(..., color=colo)
+render = I_base + I_invariance*sample_tex(uv=I_mu, ...)
+        </code></pre>    
+      </div>
+      <br>
+      <br>
+      <h2 class="subtitle" id="2d" style="margin-bottom: 0px;">
+D. MipMaps for Multi-scale Textures
+       </h2>
+      <p>
+      <span>
+This method is an multi-scale extension of 2A inspired by classical graphics approaches to sampling textures using mipmaps. The code below
+shows how <code>sample_tex()</code> is evolved for our mipmap approach.
+      </span>
+      </p>
+      <div class="code-block-container">
+        <pre><code id="bibtex" style="white-space: pre;">
+def generate_mipmaps(I, num_levels=3):
+  maps = [I]    
+  for _ in range(1, num_levels):
+      maps.append(F.interpolate(I, scale_factor=0.5, mode='bilinear', align_corners=False, recompute_scale_factor=True))
+  return maps
+def sample_mipmap(I, uv, s, num_levels=3):
+    maps = generate_mipmaps(I, num_levels=num_levels) # Generate downsampled images
+    uv = (2.*uv -1.).unsqueeze(0).unsqueeze(0) # Normalize and reshape
+    
+    # Determine the lower and upper bounds of the scaling parameter
+    L = s*(num_levels-1.)
+    lower = torch.floor(L).long().clamp(max=num_levels-1)
+    upper = torch.clamp(lower + 1, max=num_levels-1)
+    s_interp = (L - lower.float())
+
+    # Sample mipmaps
+    mip_samples = torch.empty((N, num_levels, 3), device=s.device)    
+    for idx, map in enumerate(maps):
+        mip_samples[:, idx] = F.grid_sample(map, uv, mode='bilinear', align_corners=False, padding_mode='border').squeeze(2).squeeze(0).permute(1,0)
+
+    # For each gaussian linearly interpollate based on s_interp and upper and lower.
+    gather_idx_low  = lower.view(N, 1, 1).expand(-1, 1, 3)
+    gather_idx_high = upper.view(N, 1, 1).expand(-1, 1, 3)
+    colors_low  = torch.gather(mip_samples, 1, gather_idx_low).squeeze(1)   # [N,3]
+    colors_high = torch.gather(mip_samples, 1, gather_idx_high).squeeze(1) 
+
+    return (1. - s_interp) * colors_low + s_interp * colors_high
+        </code></pre>    
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" id="introduction">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">3. Per-Dataset and Per-Scene Results for Baseline Experiments</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero" style="align-items: center;">
+  <h2 class="subtitle has-text-centered">
+   <u>1. Full Novel View and Lighting Synthesis (NVLS), Novel View Synthesis (NVS) and Novel Lighting Synthesis (NLS) Results</u>
+  </h2>
+<div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+The test data can be split into three categories: 
+<br>
+<span style="margin-left: 30px;">
+(1) Novel view and light synthesis (NVLS) where novel views and novel light conditions are tested
+</span>
+<br>
+<span style="margin-left: 30px;">
+(2) Novel view synthesis (NVS) where novel views and trained light conditions are tested
+</span>
+<br>
+<span style="margin-left: 30px;">
+(3) Novel light synthesis (NLS) where trained views and novel light conditions are tested
+</span>
+<br>
+Switch between "NVLS", "NVS" and "NLS" tabs in the sheet below to view the per-dataset and per-scene results for each baseline. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<iframe 
+  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSBHEL5QVZh35hKddGjXaHcotc00ofPGQq343N6CP8wX4QbBG9kj121gC5BQjYY2UGtrpN480QccZ8S/pubhtml?widget=true&headers=false&single=false"
+  width="80%"
+  height="800px"
+  frameborder="0">
+</iframe>
+</section>
+
+<section class="hero is-small">
+  <h2 class="subtitle has-text-centered">
+    <u>2. Side-By-Side Test Videos for the Baseline Experiments</u>
+  </h2>
+  <div class="hero-body">
+    <div class="container">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+Below we provide videos for a handful of the NVLS, NVS and NLS video results. Note that we compile the videos per-datset. Each tile is essentially it's own 1080p video, so youtube will compress this even with 4k settings. You can
+<a href="https://drive.google.com/drive/folders/1Tx5x_ibVNEqhMEE2tCHRLRuWxYOU86tP?usp=sharing">click here</a> for the original image-based side-by-side results. More videos are avalibale on the <a href="index.html">main page</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+           <h2 class="subtitle has-text-centered">
+            Novel Lighting Synthesis on Dataset 3 Scene 1-3
+          </h2>
+           <iframe 
+              width="100%" 
+              height="480px" 
+              src="https://www.youtube.com/embed/vvoTbjBuKdQ" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          <h2 class="subtitle has-text-centered">
+              Baselines: 2A, 2B, 2C, 2D + Ours + Ground Truth (GT)
+            </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Novel View and Light Synthesis on Dataset 2 Scenes 1-3
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/7lqTecFTerY" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+          <h2 class="subtitle has-text-centered">
+            Baselines: 2A, 2B, 2C, 2D + Ours + Ground Truth (GT)
+          </h2>
+        </div>
+        <div class="item item-video3">
+           <h2 class="subtitle has-text-centered">
+            Novel Lighting Synthesis on Dataset 2 Scene 1-3
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/BHEA6E75mck" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+          <h2 class="subtitle has-text-centered">
+              Baselines: 2A, 2D + Ours
+            </h2>
+        </div>
+        <div class="item item-video4">
+           <h2 class="subtitle has-text-centered">
+            Novel Lighting Synthesis on Dataset 3 Scene 1-3
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/AO0nI04muic" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+
+          <h2 class="subtitle has-text-centered">
+              Baselines: 2A, 2D + Ours
+            </h2>
+        </div>
+        <div class="item item-video5">
+          <h2 class="subtitle has-text-centered">
+            Novel View Synthesis on Dataset 2 Scenes 1-3
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/JO8BqRu0y_g" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+          <h2 class="subtitle has-text-centered">
+            Baselines: 2A, 2B, 2D + Ours
+          </h2>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero" style="align-items: center;">
+  <h2 class="subtitle has-text-centered">
+   <u>C. Extended Analysis of Full Baseline Results</u>
+  </h2>
+<div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+The test data can be split into three categories: 
+ 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light" id="ablation">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">4. Ablation Experiments</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero" id="exp0" style="align-items: center;">
+  <h2 class="subtitle has-text-centered">
+    <u>1. Full per-scene metric results for the ablations on Dataset 3 </u>
+  </h2>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+The NVLS results for each ablation experiment is provided in the google sheet below. The video results and extended descriptions/analysis of 
+each ablation experiment is provided in each section below. The first presents analysis on experiments (i-ii). The second presents the statistical
+approach and statistical outcomes of experiment (iii), where we evaluate the effect of selecting K=1 IBL scenes based on texture statistics. The third 
+presents the additional ablation results, evaluating the impact of reformulating the training of the canonical scene based on different practical scenarios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<iframe 
+  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR18T3v_e60sObm2__MFIeyIZImXngwtcfPKqrQa3ifzAyS6235WGWoc4upBy_I-bP4oTkQVVNZfJn-/pubhtml?widget=true&amp;headers=false"  width="80%"
+  height="800px"
+  frameborder="0">
+</iframe>
+
+</section>
+
+<section class="hero is-small" id="expi">
+  <h2 class="subtitle has-text-centered">
+    <u>2. Side-By-Side Test Videos and Extended Analysis for Experiments (i-ii)</u>
+  </h2>
+  <div class="hero-body">
+    <div class="container">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+      Each tile is essentially it's own 1080p video, so youtube will compress this even with 4k settings. You can
+    <a href="https://drive.google.com/drive/folders/1Tx5x_ibVNEqhMEE2tCHRLRuWxYOU86tP?usp=sharing">click here</a> for the original image-based side-by-side results.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+            Varying the number of training views on Dataset 3 Scene 1-3 (NVLS)
+          </h2>
+           <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/GABDhY9V7ag" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+          <h2 class="subtitle has-text-centered">
+            6, 12 and 18 views + Ground Truth (GT)
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            Varying the number of K training illuminations on Dataset 3 Scene 1-3 (NVLS)
+          </h2>
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/ablations_ii.mp4"
+            type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            1, 10, 20 and 30 IBL training scenes + Ground Truth (GT)
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+Here is lies...
+          </p>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small"  id="expiv">
+  <h2 class="subtitle has-text-centered">
+    <u>3. Ablating the Canonical Scene</u>
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+In the carousel below, we present two important ablations concerning the canonical scene
+<br>
+<span style="margin-left: 30px;">
+(a) The case when no "unlit" references are avaliable so one of the lit scenes acts as the canonical scene 
+</span>
+<br>
+<span style="margin-left: 30px;">
+(b) The case when the canonical scene is left un-constrained by removing the canonical loss from training
+</span>
+<br>
+As done previously, we test this on Dataset 3 and show the video results below.
+<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+NVLS test videos on Datset 3
+          </h2>
+            <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/o_PueN_m5MU" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+          <h2 class="subtitle has-text-centered">
+Cohering with the metric results, the test videos show that training (a) a pre-lit scene to act as the canonical scene produces
+substantially worse results. In almost all cases the scene color does not match the IBL texture color. When training (b) without
+the canonical loss function, we find that the visual results are not far off the original results (Ours). There are still some
+cases when the lighting of (b) is slightly miscolored (visible by observing the floor) and the geometry of the glass
+object is less robust than the result from Ours.      
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+Visual Comparison of reaction to dynamic/video Backgrounds
+          </h2>
+          <iframe 
+            width="100%" 
+            height="480px" 
+            src="https://www.youtube.com/embed/JIrBG7ktOxE" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+
+          <h2 class="subtitle has-text-centered">
+The (first) lighting video shows that (a) has a redish lingering color, likely linked to poor exposure approximation. 
+Here, (b) is a more similar to the original VSR result (Ours), though it is shown to have a higher range of constrast, 
+originating from the fact the canon is unconstrained. The same is true for the second and third video.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+
+
+<section class="section hero is-light" id="capability">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">5. Extending VSR Capabilities</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<section class="hero is-small"  id="expiii">
+  <h2 class="subtitle has-text-centered">
+    <u>1. Statistical Approach and Results for (iii): Optimizing performance via statistically-drive texture selection</u>
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+In the carousel below, we present the outcomes and insights of experiment (iii). This concerns the capture scenrio where
+only 1x IBL scene/background is captured, as was done in experiment (ii.a). However, we question whether a texture could
+be selected to optimize for VSR quality. To accomplish this we evaluate two important traits associated with spatially-varying
+RIC-IBL textures:
+<br>
+<span style="margin-left: 30px;">(1) The frequency density of the image, i.e. how varied is the frequency distribution of the texture?
+</span>
+<br>
+<span style="margin-left: 30px;">(2) The texture regularity/uniformity, i.e. how unique are local image patches?
+</span>
+<br>
+For (1) we use the energy function for the Garbor-Wavelet coefficients to indicate the variance and magnitude of texture-frequencies,
+in a single metric. The Garbor-Wavelet is typically used for natural images, over e.g. Fourier or other Wavelet schemes.
+<br>
+For (2) we use the homoeneity heuristic from the Grey-Level Co-occurent Matric (GLCM). This is another common scheme for
+assessing the regularity/uniformity of a texture. A set of heuristics are avaliable under the GLCM algorith, though we
+find the results are relatively similar, so we select the homogeneity metric for this paper. The GLCM algorithm is reliant
+on computing metrics based on filter direction and scale. This is essentially the direction along the image should we move to compare
+the current pixel-patch to the next, and how far we should move. In this paper we evaluate four directions, 0deg, 45deg, 90deg, 135deg, and 
+four distances 1 pixel, 2 pixels and 4 pixels. The 
+<a href="https://scikit-image.org/docs/0.25.x/auto_examples/features_detection/plot_glcm.html">GLCM Scikit-learn package</a>
+handles this all for us.
+<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+            Statistical plot of the frequency and regularity metrics used for optimizing reconstruction on K=1 scenes for Datset 3
+          </h2>
+          <img src="static/images/ablations_iii.png" id="video1" alt="~Missing Image~"/>
+
+          <h2 class="subtitle has-text-centered">
+            The y-axis uses the homogeneity metric associated with the GLCM algorithm for image texture classification. The x-axis averages 
+            the square of RGB Garbor-wavelet cooefficients (i.e. the banded frequency magnitudes) producing the frequency-based energy density metric. 
+            We select (a) the lowest frequency, (b) the highest frequency and regularity and (c) the highest frequency and lowest regularity. The statistics are drawn by
+            computing the x-y axis metrics per-camera for each of the 99 scenes in Dataset 3 and averaging. To avoid skewing selection, we use the camera-masks 
+            (discussed in the paper) to avoid evaluating the RIC-IBL background projections during statistical testing. Hence, these statistics are observations of the 
+            ground truth 3-D scene not including the IBL texture.
+          </h2>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+            NVLS video on Dataset 3 
+          </h2>
+            <iframe 
+              width="100%" 
+              height="480px" 
+              src="https://www.youtube.com/embed/w0wq6Osrlus" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          <h2 class="subtitle has-text-centered">
+            (ignore the Gaussian ditractors caused by generating videos at a further distance from the scene center)
+          </h2>
+        </div>
+        <div class="item item-video3">
+          <h2 class="subtitle has-text-centered">
+Pause frame showing the effectiveness of selecting the best texture for VSR
+          </h2>
+            <img src="static/images/ablations_iii_frame.png" id="video1" alt="~Missing Image~"/>
+
+          <h2 class="subtitle has-text-centered">
+Assessing only the relighting capabilities, we can see that by selecting a texture with low regularity and high frequency 
+features the NVLS results are much smoother and color accurate to the IBL texture. Not only does the low frequency texture produce
+poor lighting results, the geometry of the transparent object is also poorly reconstructed. The high frequency and regularity 
+texture produces decent geometry but fails to produce colors corresponding to the IBl texture. The high frequency and low regularity
+texture produces both decent geometry and color estimates.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+The results show that selecting the right texture can have an large impact on both reconstruction and lighting quality.
+This experiment effectively shows that textures can be statistically selected to boost VSR performance. Carrying this
+into the VP use-case, this insinuates that backgrounds can be designed for VSR prupose. In layman terms, directors
+would no longer need to make decisions about VFX and scene lighting before or during filming. If they capture scenes
+for VSR rather than for the final pixel, important creative decisions could be made later in the process with 
+much more flexibility and fine-grained control. Especially considering that VSR inherits the editability and AOVs
+associated with Gaussian Splatting tools and research. 
+              </p>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+
+<br>
+<br>
+
+<section class="section hero is-light" id="substudy">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">6. More on Subjective Study</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+<br>
+<section class="hero is-small"  id="studyoverview">
+  <br>
+  <h2 class="subtitle has-text-centered">
+    1. Experimental Overview and Assumptions
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+The study was completed in three stages:
+<br>
+<span style="margin-left: 30px;">(1) Partner-YY was employed to render edits for WP A and B
+</span>
+<br>
+<span style="margin-left: 30px;">(2) We rendered edits for WP C and D
+</span>
+<br>
+<span style="margin-left: 30px;">(3) Experts were asked to assess the outputs of WP A-D
+</span>
+<br>
+<br>
+The goal of this study was to assess the impact of VSR in practical scenairos, and compare our results to those produced by consumer-ready generative models. As part of our social 
+responsibility, this study was and should not be used to infer comparisons between WP A-B and WP D; this is why we only show the paired t-test results for WP D in comparison to WP C.
+<br>
+<br>
+The study also limits the time that Partner-YY has to edit the renders for WP A-B to one hour. Clearly, this does not consider the time it took to train our VSR model to provide the AOVs for WP B.
+Though it is important to understand the economy of time in VFX workflows, whereby the hand-off VSR training liberates time for VFX artists to focus on other tasks/shots. Still, due to this minor 
+assumption, we choose not to directly compare WP A and C, as we believe it would be misleading.
+<br>
+<br>
+Ultimately, we chose the single-image relighting/re-coloring task as it was simple enough to simulate in the paper without 1. introducing too many unknowns, and 2. simple enough to complete
+in a short time limit. The "unknowns" in VFX workflows pertain to the tools and personal decisions VFX artists may make to handle various working conditions. Hence, for a more complex problem
+the sample size (i.e., three proffessional artists) would not be sufficient to capture the broad range of approaches to relighting. Moreover, as VSR provides AOVs that are not generally acquirable
+in traditional VFX pipelines, this introduced uncertainty on how to use the AOVs effectively. So, by simplifying the problem to a single-image relighting task, Partner-YY could develop a
+pipeline for editing that reduces unknowns allowing us to make more direct comparisons between WP A, B and C. In the following section we present the VFX workflow that was designed to handle WP A and B.
+<br>
+<br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<br>
+<br>
+<section class="hero is-small"  id="studyworkflows">
+  <br>
+  <h2 class="subtitle has-text-centered">
+    2. Single-image VFX Workflows for WP A and B
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+The workflows for WP A and B were accomplished in Adobe Photoshop. For WB A, Partner-YY opted for the following process, where "optional" indicates tasks to complete if time was avaliable
+<br>
+<span style="margin-left: 30px;">(1) Roto-scope/segment the foreground objects 
+</span>
+<br>
+<span style="margin-left: 30px;">(2) Input the new background texture as a base layer and re-position it 
+</span>
+<br>
+<span style="margin-left: 30px;">(3) Re-grade the foreground using the HSV and RGB per-channel histograms to adjust the color, saturation and exposure setting to match the background image 
+</span>
+<br>
+<span style="margin-left: 30px;">(4) Deal with transparent objects using an alpha-channel clipping mask
+</span>
+<br>
+<span style="margin-left: 30px;">(5) Apply coarse shadows using a multiply clipping layer on the foregounrd, and use an additive clipping layer to apply coarse highlights. These should match
+  the light direction in the background image  
+</span>
+<br>
+<span style="margin-left: 30px;">(Optional 6) Apply bounce lighting and diffuse reflections
+</span>
+<br>
+<span style="margin-left: 30px;">(Optional 7) Do (4-6) with a hard brush and normal clipping layers, for rendering fine details
+</span>
+<br>
+<br>
+
+For WB B, Partner-YY designed the following pipeline.
+<br>
+<span style="margin-left: 30px;">(1) Use the alpha map to segment the foreground and background.
+</span>
+<br>
+<span style="margin-left: 30px;">(2) Layer the intensity map as a multiply clipping layer over the UV color map
+</span>
+<br>
+<span style="margin-left: 30px;">(3) Layer the UV color map as an additive clipping layer over the base color maps 
+</span>
+<br>
+<span style="margin-left: 30px;">(4) Order the base color map ontop of the relighting prediction and erase regions in the base color map where relighting is not required 
+</span>
+<br>
+<span style="margin-left: 30px;">(5) Iteratively smooth the UV color and intensity maps based on the object-level texture and material 
+</span>
+<br>
+<span style="margin-left: 30px;">(Optional 6) Apply additional highlights and shadows to constrast effects
+</span>
+<br>
+<br>
+Examples of each workflow is show in the carousel below. Note the timelapse captures every 30 frames - it not based on time. For rotoscoping and histogram editing functions, 
+we were only able to capture the frame once we commited the edits so while the frame count for these steps in WP A and B seems short, they are in actuallity quite time consuming.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <h2 class="subtitle has-text-centered">
+Timelaps of WP A Workflow in Practice
+          </h2>
+            <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/WORKFLOW_WPA.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video2">
+          <h2 class="subtitle has-text-centered">
+Timelaps of WP B Workflow in Practice
+          </h2>
+            <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/WORKFLOW_WPB.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<section class="hero is-small"  id="participantquestions" style="align-items: center;">
+  <br>
+  <h2 class="subtitle has-text-centered">
+    3. Data Handling and Statistical Processing
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+The full set of results are shown in the sheet below. The code used to run the paired t-test and generate the box plots is also provided below.
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <iframe 
+  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSBHEL5QVZh35hKddGjXaHcotc00ofPGQq343N6CP8wX4QbBG9kj121gC5BQjYY2UGtrpN480QccZ8S/pubhtml?gid=1260530965&single=true"  width="80%"
+  height="800px"
+  frameborder="0">
+</iframe>
+<br>
+<br>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+<br>
+<br>
+  <div class="code-block-container">
+    <pre><code id="bibtex" style="white-space: pre;">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from itertools import combinations
+from scipy.stats import ttest_rel
+
+# ---- Load ----
+df = pd.read_csv("results_full.csv")
+
+# Drop the non-data header row (ID is blank and cells are a/b/c)
+df = df.dropna(subset=["ID"]).copy()
+
+# ---- Likert -> numeric ----
+scale = {
+    "Disagree": 1,
+    "Somewhat Disagree": 2,
+    "Unsure": 3,
+    "Somewhat Agree": 4,
+    "Agree": 5
+}
+df = df.replace(scale)
+
+# Ensure numeric
+for c in df.columns:
+    if c != "ID":
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+
+models = ["WP A", "WP B", "WP C", "WP D"]
+labels = ["WP A", "WP B", "WP C", "WP D"]
+
+# Map subquestion -> column suffix
+# a = base, b = .1, c = .2
+subq_map = {"A": "", "B": ".1", "C": ".2"}
+
+# ---- Make one plot per subquestion ----
+for subq_label, suffix in subq_map.items():
+    # participant means for THIS subquestion
+    part = df.groupby("ID")[[m + suffix for m in models]].mean()
+
+    print(f"\nPaired t-tests for Question {subq_label}")
+    alpha = 0.05
+    print(f"Alpha = {alpha:.4f}")
+    for m1, m2 in combinations(models, 2):
+        x = part[m1 + suffix]
+        y = part[m2 + suffix]
+
+        # drop any participants missing either value
+        mask = x.notna() & y.notna()
+        t, p = ttest_rel(x[mask], y[mask])
+
+        sig = " *" if p < alpha else ""
+        print(f"{m1} vs {m2}: t = {t:.3f}, p = {p:.4f}{sig}")
+
+    data = [part[m + suffix].dropna().values for m in models]
+    means = [np.mean(d) for d in data]
+    xpos = np.arange(1, len(models) + 1)
+
+    plt.figure()
+
+    # Boxplot: IQR box, median line; whiskers set to min/max
+    plt.boxplot(
+        data,
+        labels=labels,
+        whis=(0, 100),      # min/max whiskers
+        showfliers=False    # hide outliers markers since whiskers already min/max
+    )
+
+    # Overlay mean as a point
+    plt.scatter(xpos, means, marker="D", label="Mean")
+
+    plt.ylabel("Score (1–5)")
+    plt.title(f"Participant Summary by Model — Question {subq_label}")
+
+    # legend to side
+    plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.tight_layout()
+    plt.savefig(f"Raw_{subq_label}_boxplot.png", dpi=300, bbox_inches="tight")
+        </code></pre>    
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<br>
+<br>
+
+<section class="section hero is-light" id="limitations">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">7. More on Limitations and Future work</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<section class="hero is-small"  id="staticfuture">
+  <br>
+  <h2 class="subtitle has-text-centered">
+    1. Static VSR Problems
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+Not all filmmaking is dynamic. In VP, the range applications exceeds human-centric capture. Hence, there is value is developing 
+robust static VSR pipelines. 
+<br>
+<br>
+A good use case for this is car advertisement, where cars are placed within a VP volume to simulate driving in various foreign locations. Through 
+VP, numerous costs linked to trasnportation, insurance and hiring car-specific 
+camera hardware can be avoided. Pre-production planning is also simplified as directors no longer need to consider location-specific challenges. Still,
+VP sets are expensive to hire, various shot types are still challenging to achieve, and baked lighting for highly reflective and transparent surfaces 
+(i.e. cars) are non-trivial to edit in post. Hence, VSR provides a clear solution to reducing VS
+productions costs by only having to capture the scene once and also support downstream video/shot editing. However, we chose this case 
+because it also highlights flaws in our current VSR approach that need to be developed in future work. The results from our model show that one of the 
+largest challenge with VSR is rendering high-resolution reflections in regions where Gaussian distribution is sparse. This mostly concerns the relighting of 
+highly reflective transparent surfaces, so would present major problems when filming cars for advertisement using a VP stage.
+<br>
+<br>
+We believe this issue mainly lies with our choice of adaptive Gaussian densification scheme. We use the vanilla approach that instances points based on the
+gradient changes propagrated from the reconstruction loss. Hence, image-regions with greater reconstruction errors garner greater attention. However, this 
+method of instancing new Gaussians relies on spliting and cloning pre-existing Gaussians. This presents problems in regions with sparse Gaussians, 
+such as those relating to transparent object. Hence, during training our VSR pipeline is unlikely to populate these spatial regions. This highlights the
+need for content-aware densifications schemes.
+<br>
+<br>
+Past this we believe that the initialization of per-Gaussian texture sample coordinates could be improved. When viewing the novel view synthesis results
+with a moving camera we notice view-dependent flickering artifacts. This occurs when the view-dependent change in texture sample coordinates is sensitive 
+and the IBL sample scale is low, i.e. when the Gaussian samples a high-resolution mipmap. For IBL textures with high frequency patterns, this can be 
+detrimental to viewing smoothness. In part this is a dataset limitation - as we only use 18 cameras for training, sparse-view reconstruction
+problems arise leading to view-dependent overfitting. Thus, future work may want to explore methods of smoothing view-dependent features to suppress
+flickering artifacts. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<br>
+<br>
+<section class="hero is-small"  id="dynamicfuture">
+  <h2 class="subtitle has-text-centered">
+2. Dynamic VSR Problems
+  </h2>
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+Developing a dynamic VSR pipeline reguires first understanding the four types of illumination events. First, illumination can change due to changes in 
+RIC-IBL texture. Second, illumination can change depending on the viewing angle. Third, illumination can change depending on the global position of 
+the object within the scene. Fourth, illumination can change depending the objects local orientation. In the paper, we deal with disentangling the 
+first two types of lighting event. The third and fourth events arise when dealing with dynamic or editable static scenes.
+<br>
+<br>
+Dynamic VSR pipelines that deal with all four events could concievable take a number of approaches:
+<br>
+<span style="margin-left: 30px;">(1) Modelling 3D neural exposure and texture sampling fields with occlusion awarness
+</span>
+<br>
+<span style="margin-left: 30px;">(2) Implicitly modelling per-Gaussian temporal lighting and shadow features
+</span>
+<br>
+<br>
+Regarding option (1), future work could rely signed distance fields (SDF) typically found in neural surface reconstruction research. The challenge here
+would be to adapt the per-Gaussian texture sampling and exposure parameters (proposed in the paper) as a 3D neural field, such that as an object moves 
+within the 3D field the lighting reponse changes. This problem can be simplified by assuming that the VP LED wall is static, hence the 3D lighting
+field can be modelled as time-independent. For example, using a neural radiance field (ie.e. a coordinate MLP) would only require inputting the current
+position to return the gamma and mu lighting parameters prodposed in the paper. To deal with local temporal events (i.e. the fourth type of illumination event),
+a dynamic signed distance field could then be employed to handle lighting-based occlusions. This would ideally modify the lighting reponse from the
+3D light fields to account for dynamic shadows and highlights. For filmmaking, we believe this options is the strongest option as, ideally, this solution 
+models 3D lighting field independent of the scene composition. Hence, the step towards instancing new objects, removing objects, or moving objects
+is trivialized as the 3D light field and occlusion model should be capable of handling these types of event.
+<br>
+<br>
+On the other hand, option (2) may provide a stronger approach to fitting a dynamic scene for cases where geometry editing is not desired/necessary.
+The challenge here would be to discover per-Gaussian representation that inherits the prior accomplishments of dynamic GS while also handling with local
+lighting changes. A naive solution to this may involve the hexplane representation which could be used to approximate residual changes in 
+gamma and mu w.r.t time, such that c' = c + gamma(t)*delta_c(mu(t), I_k^B). We could then implicitly deal with occlusions by introducing an 
+additional temporal indensity parameter that models c'' = psi(t) * c'. Still, work would need to be done towards designing a training 
+strategy that is capable of disentangling/constraining gamma(t) and psi(t). Otherwise this naive solution would be prone to overfitting the psi(t) parameter
+as it undergoes a larger degre of gradients flow in comparison to gamma(t), during backpropagation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<br>
+<br>
+<section class="section hero is-light" id="references">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">References</h2>
+
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<section class="hero is-small">
+  <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+[] 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to that page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
