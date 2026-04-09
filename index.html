@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>
+      Relightable Gaussian Splatting for Virtual Production Using Image-Based Illumination
+  </title>
+  <link rel="icon" type="image/x-icon" href="static/images/icon.JPG">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              Relightable Gaussian Splatting for Virtual Production Using Image-Based Illumination
+            </h1>
+            <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="" target="_blank">Anonymous Submission</a>
+                </span>
+    
+            </div>
+              <span class="link-block">
+                  <a href="index.html"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Showcase</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                  <a href="datasets.html" 
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Datasets</span>
+                </a>
+              </span>
+
+              <!-- Github link -->
+            <span class="link-block">
+                <a href="https://github.com/interims-git/interims-git.github.io"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+                
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+In-camera visual effects in virtual production (VP) use LED walls to provide both background imagery and image-based lighting. While this enables on-set compositing, it tightly couples lighting, background and scene appearance, limiting flexibility for downstream editing. For 3D applications, inverse rendering (IR) aims to reconstruct and relight a scene by jointly estimating 3D geometry and illumination, with environment maps. However, the maps are typically low-resolution, they assume far-field lighting and physically based rendering makes IR sensitive to geometric errors. In VP, with near-field and high-resolution image-based lighting, these limitations lead to inaccurate 3D reconstruction, relighting and non-trivial editing processes.
+<br>
+We propose a VP-specific framework that avoids physically based IR. We introduce a multi-view, multi-illumination dataset that captures VP scenes under varying LED wall content, and leverage the known background imagery to decompose Gaussian Splatting appearance into fixed and variable lighting components. Variable lighting is modeled by assigning each Gaussian a UV coordinate sampling the background texture, modulated by a learnable per-Gaussian intensity parameter. Combined with a base color representing fixed appearance, this enables relighting through direct manipulation of the background image. 
+Our method achieves high-quality 3D reconstruction and controllable relighting without requiring geometry, normals, or environment maps. It is efficient ( less than 3 GB RAM, less than 5 GB VRAM, les than 2 hours training, ~35 FPS) and supports rendering useful AOVs including depth, lighting intensity, variable lighting color, and unlit renders.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body" style="padding-bottom: 0px;">
+    <div class="container">
+      <br>
+    <h2 class="subtitle has-text-centered">
+        Main Showcase
+    </h2>
+    <div class="container is-max-desktop" >
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths" style="padding-bottom: 0px;">
+              <p>
+Showcasing our novel view and lighting results on a minature virtual production stage. <span style="font-style: italic;">Please pause the video if needed.</span>
+<br>
+<br>
+Dataset 1:
+<br>
+Timestamp [00-01s] shows the novel view and lighting results
+<br>
+Timestamp [01-39s] shows the dynamic (video) lighting result
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+    <video poster="" id="video1" autoplay controls muted loop height="100%">
+      <source src="static/videos/showcase.mp4"
+      type="video/mp4">
+    </video>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small"  style="padding-top: 0px;">
+  <div class="hero-body" style="padding-top: 0px;">
+    <div class="container">
+      <br>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths" style="padding-top: 0px;">
+              <p >
+Dataset 3:
+<br>
+Timestamp [00-10s] shows the novel view and lighting results
+<br>
+Timestamp [10-40s] shows a star exploding in space
+<br>
+Timestamp [40-60s] shows lightning
+<br>
+Timestamp [60-99s] shows bubbles moving around and changing color
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+<iframe
+  width="100%"
+  height="480"
+  src="https://www.youtube.com/embed/FFgZhMLaXAE"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+    <h2 class="subtitle has-text-centered">
+      Estimating the real LED Wall's Exposure Settings
+    </h2>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+              <p>
+Mentioned in the main paper, our <span style="font-style: italic;">light intensity</span> parameter models the magnitude of outgoing 
+light captured by the camera. This also captures the LED wall's brightness and color settings. Therefore, as we decompose our scene
+into fixed and variable lighting components, we can directly modify the variable light intensity parameter to reduce only the LED walls brightness while
+preserving the color and intensity of the fixed lighting setup. This is done by multiplying the light intensity value with a value between 0-1, prior to rendering.
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+    <video
+      width="100%"
+      height="480"
+      controls
+      preload="metadata"
+      playsinline
+    >
+      <source src="static/videos/exposure.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+
+
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+
+      <h2 class="subtitle has-text-centered">
+    Novel View Synthesis Capabilities 
+      </h2>
+      <p class="is-centered has-text-centered">
+The following demonstrates the novel view synthesis capabilities of our reconstruction and relighting framework.
+      </p>
+      <br>
+<iframe
+  width="100%"
+  height="480"
+  src="https://www.youtube.com/embed/RJnTqLVxGN0"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+    <h2 class="subtitle has-text-centered">
+      Live background & lighting design for VP 
+    </h2>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+              <p >
+By simulating the virtual production set users can design, edit and modify 
+the background textures in real-time and without even visiting the virtual production set in-person. <span style="font-style: italic;"> This example was 
+streamed from Photoshop.</span> 
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+    <iframe 
+      width="100%" 
+      height="480"
+src="https://www.youtube.com/embed/z8YZhX7JfDU"
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen>
+    </iframe>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small">
+  
+  <div class="hero-body">
+    <div class="container">
+      <br>
+  <h2 class="subtitle has-text-centered">
+    Editable IBL Goemetry (post-training) & Video IBL Synthesis Examples (end of video) 
+  </h2>
+
+        <div >
+            <iframe 
+              width="100%" 
+              height="480" 
+              src="https://www.youtube.com/embed/BFMnmgDFOGA" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+
+      <h2 class="subtitle has-text-centered">
+Novel View & Lighting Synthesis Results
+      </h2>
+      <p class="is-centered has-text-centered">
+Dataset 3: Comparison to TensoIR and Proxy Baselines
+<br>
+[Frame 01-10] Scene/Subset 1
+<br>
+[Frame 11-20] Scene/Subset 2
+<br>
+[Frame 21-30] Scene/Subset 3
+      </p>
+      <br>
+<iframe
+  width="100%"
+  height="480"
+  src="https://www.youtube.com/embed/uK6E61z2f4U"
+
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+      <p class="is-centered has-text-centered">
+Dataset 2: Comparison to TensoIR and Proxy Baselines
+<br>
+[Frame 01-10] Scene/Subset 1
+<br>
+[Frame 11-20] Scene/Subset 2
+<br>
+[Frame 21-30] Scene/Subset 3
+      </p>
+      <br>
+<iframe
+  width="100%"
+  height="480"
+    src="https://www.youtube.com/embed/10GoShKqnmM"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+      <p class="is-centered has-text-centered">
+Dataset 1: Comparison to TensoIR and Ablation when the Light Intensity is parametrized as 3-channel (RGB) instead of 1-channel (Greyscale)
+<br>
+[Frame 01-10] Scene/Subset 1
+<br>
+[Frame 11-20] Scene/Subset 2
+<br>
+[Frame 21-30] Scene/Subset 3
+      </p>
+      <br>
+<iframe
+  width="100%"
+  height="480"
+    src="https://www.youtube.com/embed/goJfslQgEr4"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body" style="padding-bottom: 0px;">
+    <div class="container">
+      <br>
+    <h2 class="subtitle has-text-centered">
+Subjective Study Workflow: A New Paradigm for VFX 
+    </h2>
+    <div class="container is-max-desktop" >
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths" style="padding-bottom: 0px;">
+              <p>
+The subjective study compares our approach, to (A) purely manual footage relighting, and (B) manual relighting  with the help of AOVs generated using our approach. This
+presents a new paradigm for VFX, so below we provide educational videos that break down the workflow for tasks (A) and (B). 
+<br>
+<br>
+Note, the length of the videos <span style="font-style: italic;">does not</span> correspond to the
+total time; his was fixed to one hour for each task and artist.
+<br>
+<br>
+(A) Purely Manual Relighting
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+    <video poster="" id="video1" autoplay controls muted loop height="100%">
+      <source src="static/videos/WORKFLOW_WPA.mp4"
+      type="video/mp4">
+    </video>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body" style="padding-bottom: 0px;">
+    <div class="container">
+    <div class="container is-max-desktop" >
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths" style="padding-bottom: 0px;">
+              <p>
+(B) Manual Relighting with the help of AOVS. This includes the relit image rendered from our method and the light intensity, scale, UV, residual color and canonical color maps. 
+              </p>
+              <br>
+          </div>
+        </div>
+    </div>  
+    <video poster="" id="video1" autoplay controls muted loop height="100%">
+      <source src="static/videos/WORKFLOW_WPB.mp4"
+      type="video/mp4">
+    </video>
+
+    </div>
+  </div>
+</section>
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{...}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+
+<!-- End image carousel -->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to that page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
