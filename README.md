@@ -17,6 +17,7 @@ For training `ARGS` should be the subset we want to train. Choose from `[1, 2, 3
 For viewing (after training) `ARGS= "view [checkpoint iteration]"`, where `[checkpoint iteration]` should be replaced by the checkpoint iteration you want to view/load.
 
 
+
 # Training Viewer
 - View the scene from the training and testing views
 - Change the render flags to view depth, XYZ, or any of the other AOVs
